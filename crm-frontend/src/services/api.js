@@ -3,7 +3,7 @@
 import axios from "axios";
 
 // Axios instance — all requests go to the backend
-const http = axios.create({ baseURL: "http://localhost:4000/api" });
+const http = axios.create({ baseURL: "https://stitchelegantmetaleadcrm-production.up.railway.app/api" });
 
 // Attach JWT token to every request (ready for Phase 9)
 http.interceptors.request.use((cfg) => {
