@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#dad8e8",
+                    "on-tertiary-container": "#ffbbae",
+                    "on-background": "#1a1b25",
+                    "surface-container-low": "#f4f2ff",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "background": "#fbf8ff",
+                    "on-primary-fixed": "#000668",
+                    "on-primary-container": "#c4c7ff",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "on-surface-variant": "#444557",
+                    "primary-fixed-dim": "#bdc2ff",
+                    "inverse-on-surface": "#f1effe",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-tertiary-fixed-variant": "#8e1400",
+                    "surface-tint": "#2d3eff",
+                    "surface-container-highest": "#e3e1f0",
+                    "primary-fixed": "#e0e0ff",
+                    "inverse-primary": "#bdc2ff",
+                    "secondary": "#505f76",
+                    "surface-container-high": "#e8e6f6",
+                    "outline-variant": "#c5c5da",
+                    "surface-bright": "#fbf8ff",
+                    "secondary-container": "#d0e1fb",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1a1b25",
+                    "on-secondary-container": "#54647a",
+                    "outline": "#757589",
+                    "primary-container": "#1b2efd",
+                    "inverse-surface": "#2f2f3b",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "tertiary-fixed": "#ffdad3",
+                    "tertiary-container": "#aa1a00",
+                    "surface-variant": "#e3e1f0",
+                    "primary": "#0015cd",
+                    "on-error-container": "#93000a",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#0018e4",
+                    "surface-container": "#eeecfc",
+                    "surface": "#fbf8ff",
+                    "tertiary": "#7f1100",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#d3e4fe",
+                    "on-tertiary-fixed": "#3e0400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "2rem",
+                    "gutter": "1.5rem",
+                    "unit": "4px",
+                    "sm": "1rem",
+                    "xs": "0.5rem",
+                    "md": "1.5rem",
+                    "container-padding": "2.5rem",
+                    "xl": "3rem"
+            },
+            "fontFamily": {
+                    "label-caps": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "h2": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "500"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf8ff;
+            font-family: 'Manrope', sans-serif;
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid rgba(27, 46, 253, 0.1);
+            box-shadow: 0 40px 60px -15px rgba(27, 46, 253, 0.03);
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar Component -->
+<aside class="docked left-0 h-screen w-64 border-r border-blue-100/20 bg-slate-50/50 backdrop-blur-md shadow-[40px_0_60px_-15px_rgba(27,46,253,0.03)] flex flex-col py-6 px-4">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-blue-700 tracking-tight">MetaCRM</h1>
+<p class="text-[10px] text-slate-500 font-medium">Lead Management</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Dashboard Active -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-blue-700 bg-blue-50/50 font-semibold border-r-4 border-blue-600 font-manrope text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 font-manrope text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span>Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 font-manrope text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_ind">assignment_ind</span>
+<span>Assigned Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 font-manrope text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Team</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 font-manrope text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span>Meetings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 font-manrope text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<div class="pt-4 mt-4 border-t border-blue-100/20 flex items-center gap-3 px-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Close-up portrait of a professional male manager in a clean white studio setting, soft cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGlPy5gTAXON-cqrSFRT3ABdozYfV400HmWiRMVf1T8pj6x7hvTEjqn2j5rsyOx_1Qu1aRj7rj_KzuZbhLtr3XRiod-6VFc7TbACd_GAh6VDmSMet9vmM0XU5EnAZnGTL3g7XXa212oo37WZQeV0MttUcsv9k49367HqSemFzcSTBkWaI6VbkCc0WUpdktyebBxLmwmxIpVy_Er3R3ZJ0DcRdePqf3pU0yVJcvXozlvadkV6Nv8W5nl_br1EP8DCHRzHQCK5poIChI"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold text-slate-700 truncate">Alex Rivera</p>
+<p class="text-[10px] text-slate-500 truncate">Senior Account Exec</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- TopNavBar Component -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full px-8 h-16 bg-white/80 backdrop-blur-xl border-b border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)]">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-xl text-sm font-manrope focus:ring-2 focus:ring-blue-100 transition-all" placeholder="Search leads, tasks, or meetings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-blue-100/20 mx-2"></div>
+<button class="bg-primary-container text-white px-5 py-2 rounded-xl font-manrope text-sm font-bold shadow-lg shadow-blue-200 flex items-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                        Add Lead
+                    </button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 max-w-[1440px] mx-auto w-full space-y-gutter">
+<!-- Welcome Section -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface">Good Morning, Alex</h2>
+<p class="font-body-md text-secondary mt-1">Here's your productivity overview for today, October 24th.</p>
+</div>
+<div class="flex gap-3">
+<div class="glass-card px-4 py-2 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-xs font-bold text-slate-600 font-label-caps">LIVE DIALER ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Lead Summary (Bento Large) -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-3 gap-gutter">
+<div class="col-span-3 glass-card p-6">
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-h2 text-body-lg text-primary">My assigned leads</h3>
+<button class="text-xs font-bold text-blue-600 font-label-caps flex items-center gap-1">VIEW ALL <span class="material-symbols-outlined text-xs">arrow_forward</span></button>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="bg-blue-50/50 rounded-2xl p-4 border border-blue-100/50">
+<p class="text-xs font-bold text-blue-600 font-label-caps mb-1 uppercase">New Entries</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-blue-700">12</span>
+<span class="text-xs text-green-600 font-bold">+4 today</span>
+</div>
+</div>
+<div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+<p class="text-xs font-bold text-slate-500 font-label-caps mb-1 uppercase">In Progress</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-slate-700">48</span>
+<span class="text-xs text-slate-400">85% contact rate</span>
+</div>
+</div>
+<div class="bg-indigo-50/50 rounded-2xl p-4 border border-indigo-100/50">
+<p class="text-xs font-bold text-indigo-600 font-label-caps mb-1 uppercase">Qualified</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black text-indigo-700">07</span>
+<span class="text-xs text-indigo-400">Target: 10</span>
+</div>
+</div>
+</div>
+<!-- Quick Lead List -->
+<div class="mt-8 space-y-2">
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">JD</div>
+<div>
+<p class="text-sm font-bold text-slate-700">Jordan Davila</p>
+<p class="text-[11px] text-slate-400">CloudScale Solutions • $12k Potential</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-3 py-1 bg-blue-100/50 text-blue-700 text-[10px] font-bold rounded-full">HOT LEAD</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-blue-500 transition-colors" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xs">SK</div>
+<div>
+<p class="text-sm font-bold text-slate-700">Sarah Kinsley</p>
+<p class="text-[11px] text-slate-400">Kinetic Media • $4.5k Potential</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-full">FOLLOW UP</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-blue-500 transition-colors" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tasks/Follow-ups (Mid Height) -->
+<div class="col-span-3 glass-card p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-h2 text-body-lg text-primary">Today’s tasks</h3>
+<span class="bg-blue-100 text-blue-700 text-[10px] font-black px-2 py-0.5 rounded">4 REMAINING</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-4 rounded-2xl bg-surface-container-lowest border border-slate-100">
+<div class="mt-1 w-5 h-5 rounded border-2 border-blue-200 flex items-center justify-center cursor-pointer hover:bg-blue-50"></div>
+<div class="flex-1">
+<p class="text-sm font-bold text-slate-700">Review contract for Apex Corp</p>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-[11px] text-red-500 font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">priority_high</span> High Priority
+                                            </span>
+<span class="text-[11px] text-slate-400">Due 11:30 AM</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-2xl bg-surface-container-lowest border border-slate-100">
+<div class="mt-1 w-5 h-5 rounded border-2 border-blue-200 flex items-center justify-center cursor-pointer hover:bg-blue-50"></div>
+<div class="flex-1">
+<p class="text-sm font-bold text-slate-700">Follow up with Marcus Thorne</p>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-[11px] text-blue-500 font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">phone_callback</span> Call Task
+                                            </span>
+<span class="text-[11px] text-slate-400">Due 2:00 PM</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-2xl bg-surface-container-lowest border border-slate-100 opacity-50 grayscale">
+<div class="mt-1 w-5 h-5 rounded bg-blue-600 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-slate-700 line-through">Send pricing deck to Elena</p>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-[11px] text-slate-400">Completed 9:15 AM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Panel: Meeting Reminders (Asymmetric Narrow) -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<div class="glass-card p-6 h-full">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-h2 text-body-lg text-primary">Meetings</h3>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="relative pl-8 space-y-10">
+<!-- Timeline Line -->
+<div class="absolute left-3.5 top-2 bottom-2 w-[2px] bg-blue-50"></div>
+<!-- Meeting 1 (Active/Soon) -->
+<div class="relative">
+<div class="absolute -left-8 top-1 w-7 h-7 rounded-full bg-blue-600 border-4 border-white shadow-md flex items-center justify-center z-10">
+<div class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></div>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-black text-blue-700 font-label-caps">10:00 - 10:45 AM</span>
+<span class="bg-blue-100 text-blue-700 text-[9px] px-2 py-0.5 rounded-full font-bold">STARTING SOON</span>
+</div>
+<div class="bg-blue-600 rounded-2xl p-5 text-white shadow-xl shadow-blue-200">
+<p class="text-xs text-blue-100 font-bold uppercase tracking-widest mb-1">Product Demo</p>
+<h4 class="text-lg font-bold leading-tight mb-4">Discovery Call: Vertex Global</h4>
+<div class="flex items-center gap-3">
+<img class="w-6 h-6 rounded-full border border-white/20" data-alt="Portrait of a young professional male in a suit, professional business environment, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZFxNEfcpSJ2IUURmJOqJ-vjWcVXM93hutqUkD6i36hEzsg9fYGM2Vm3oenEPiOkja5NYX19QXC8MA_c3Cas1frH0KiKouCM0WsLTNlAR2oNu-ENkPi7tNPkkxPZlHN_SE89JT_PRxH0khUcn2DQKO5OvORTBe1hwYczxseEMTWmSrK42JBge-Z8W3Fo86FmBCUVHju8NkxEDGafQtZepNUV513oKH9oboKH4A-cpfqR2hu7TpEGdWJMW-_TR9LMyokSbd2H3nfGX5"/>
+<span class="text-xs font-medium">Liam Vance (CTO)</span>
+</div>
+<button class="w-full mt-6 bg-white text-blue-700 py-2.5 rounded-xl text-xs font-bold hover:bg-blue-50 transition-colors">JOIN MEETING</button>
+</div>
+</div>
+</div>
+<!-- Meeting 2 -->
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-4 h-4 rounded-full bg-slate-200 border-2 border-white z-10"></div>
+<div>
+<p class="text-xs font-bold text-slate-400 font-label-caps mb-2">01:30 - 02:00 PM</p>
+<div class="bg-white border border-slate-100 rounded-2xl p-5 hover:border-blue-200 transition-all cursor-pointer">
+<h4 class="text-sm font-bold text-slate-700 mb-1">Contract Discussion</h4>
+<p class="text-xs text-slate-400 mb-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">person</span> Julianna Moore
+                                            </p>
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white" data-alt="Portrait of a female professional executive, modern office background, soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6S4Lt7bJXTsGEZvDpgl3q53tt80BsBzVd2FtYNXbMJ5K9F5kz0Xp84RqGs9fF-Ysw2_PXfKK53gbwSfit4jiPbGuVh2YtnFWDbYl5W4bhmiwX4o9IegbRs2aUhJQc2bElmKLhyhOCghfN_h41IvpyaoKB-895o_lxnp_b1kYNsQfuCX_KrcroJYFp4tzUz4HAlq9AbCL1afaIVTNwRo0mPw6drwF7-HdgKWBqeGsA40YZlZI4Kmw7o8ydX_8rkXIJwhqfnC7QHaM-"/>
+<img class="w-6 h-6 rounded-full border-2 border-white" data-alt="Portrait of a female professional analyst, soft studio lighting, clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfwuwffPYIoAx_NoJma2ZL-vlnPiGfykW9Wcf7IdW5NFzh5mMUvMXn7ANPGtf1QuJJTNZNqpnHSEe664IZoFdW-Zvs-UZu3lKbMhYdJGARUf8hF1ldl8rBtUCC9XL3xibxp_tKSqsqk_9f6KohLpOSWCz93S9WY1Po1f0ZeadULkWicVolJCqC5FSk_9EKxBsUmBGODYmpNS5mKG6TNp2GB432qZCJjMxEFNCJEaks0G1CfwBHjzP4AQus26A_CsTgKYRURwKafIBu"/>
+<div class="w-6 h-6 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-[8px] font-bold text-slate-500">+2</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Meeting 3 -->
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-4 h-4 rounded-full bg-slate-200 border-2 border-white z-10"></div>
+<div>
+<p class="text-xs font-bold text-slate-400 font-label-caps mb-2">04:00 - 04:30 PM</p>
+<div class="bg-white border border-slate-100 rounded-2xl p-5 hover:border-blue-200 transition-all cursor-pointer">
+<h4 class="text-sm font-bold text-slate-700 mb-1">Weekly Pipeline Review</h4>
+<p class="text-xs text-slate-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">group</span> Sales Team A
+                                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Activity Insight -->
+<div class="glass-card p-6 flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-blue-50/20 to-transparent">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-800">Smart Prediction</h4>
+<p class="text-xs text-slate-500">Based on your activity, Wednesday mornings are best for follow-ups with leads in the Tech sector.</p>
+</div>
+</div>
+<button class="px-6 py-2 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition-all">ENABLE AUTO-SCHEDULING</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

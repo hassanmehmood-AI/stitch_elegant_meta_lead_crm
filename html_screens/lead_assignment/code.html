@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MetaCRM - Lead Assignment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dad8e8",
+                        "on-tertiary-container": "#ffbbae",
+                        "on-background": "#1a1b25",
+                        "surface-container-low": "#f4f2ff",
+                        "tertiary-fixed-dim": "#ffb4a5",
+                        "background": "#fbf8ff",
+                        "on-primary-fixed": "#000668",
+                        "on-primary-container": "#c4c7ff",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-surface-variant": "#444557",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "inverse-on-surface": "#f1effe",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#8e1400",
+                        "surface-tint": "#2d3eff",
+                        "surface-container-highest": "#e3e1f0",
+                        "primary-fixed": "#e0e0ff",
+                        "inverse-primary": "#bdc2ff",
+                        "secondary": "#505f76",
+                        "surface-container-high": "#e8e6f6",
+                        "outline-variant": "#c5c5da",
+                        "surface-bright": "#fbf8ff",
+                        "secondary-container": "#d0e1fb",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1b25",
+                        "on-secondary-container": "#54647a",
+                        "outline": "#757589",
+                        "primary-container": "#1b2efd",
+                        "inverse-surface": "#2f2f3b",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "tertiary-fixed": "#ffdad3",
+                        "tertiary-container": "#aa1a00",
+                        "surface-variant": "#e3e1f0",
+                        "primary": "#0015cd",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#0018e4",
+                        "surface-container": "#eeecfc",
+                        "surface": "#fbf8ff",
+                        "tertiary": "#7f1100",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary-fixed": "#3e0400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "2rem",
+                        "gutter": "1.5rem",
+                        "unit": "4px",
+                        "sm": "1rem",
+                        "xs": "0.5rem",
+                        "md": "1.5rem",
+                        "container-padding": "2.5rem",
+                        "xl": "3rem"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "500"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf8ff;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 h-screen w-64 border-r border-blue-100/20 dark:border-blue-900/20 bg-slate-50/50 backdrop-blur-md shadow-[40px_0_60px_-15px_rgba(27,46,253,0.03)] z-50 flex flex-col py-6 px-4">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" data-icon="hub">hub</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-bold text-blue-700 tracking-tight font-h2">MetaCRM</span>
+<span class="text-[10px] text-slate-400 font-label-caps uppercase tracking-widest">Lead Management</span>
+</div>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                Leads
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-blue-700 bg-blue-50/50 font-semibold border-r-4 border-blue-600 font-manrope text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_ind">assignment_ind</span>
+                Assigned Leads
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Team
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                Meetings
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-blue-100/10">
+<div class="flex items-center gap-3 px-2">
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" data-alt="Professional headshot of a senior CRM manager with a confident expression, soft natural office lighting background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4RgFDGB_HmtLNawUzN9WytBp2iBJp9fztsnOiDKyt8JX2K0BxVO7-GHRWcvqd_u5acpaD81seGdH0gSYP57TR86Di8lOQo7MECvJyCSxkFM5lyeWEr_Wgruc9mdPtRqik2DlI782tODa1fMBKMsCbKaOSX5IpmU7TJ0WFxzTi3tunP2_fSoQ4IQW0cCneZ86xnDeSHwwfwbAT_VNdLmjGI2YSN7EpWqzA5dE0NuX8-X8J2-qY156PN964QHanu6aG32k-r4EzeVIv"/>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-700">Alex Rivers</span>
+<span class="text-xs text-slate-400">Admin</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen relative overflow-hidden">
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full px-8 h-16 bg-white/80 backdrop-blur-xl border-b border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)]">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg group-focus-within:text-blue-600 transition-colors" data-icon="search">search</span>
+<input class="w-full bg-slate-50 border-none rounded-xl py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-blue-100 transition-all font-body-md" placeholder="Search unassigned leads..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<button class="text-slate-500 hover:text-blue-600 transition-all relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<button class="text-slate-500 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-blue-100/30"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-blue-700 leading-none">Senior Manager</p>
+<p class="text-[10px] text-slate-400 font-label-caps mt-0.5">Role Indicator</p>
+</div>
+<button class="bg-primary-container text-white px-5 py-2 rounded-xl text-sm font-bold shadow-md hover:opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                        Add Lead
+                    </button>
+</div>
+</div>
+</header>
+<div class="p-8 max-w-7xl mx-auto w-full">
+<!-- Breadcrumbs & Title Area -->
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-h1 text-on-background tracking-tight mb-2">Lead Assignment Interaction</h1>
+<p class="text-secondary font-body-md">Manage unassigned high-priority leads and distribute them to your team efficiently.</p>
+</div>
+<div class="flex items-center gap-3 bg-white p-2 rounded-2xl shadow-sm border border-primary-100/10">
+<button class="px-4 py-2 bg-blue-50/50 text-blue-700 rounded-lg text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="checklist">checklist</span>
+                        Bulk Assign
+                    </button>
+<button class="px-4 py-2 text-slate-500 hover:bg-slate-50 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_alt">filter_alt</span>
+                        Filter
+                    </button>
+</div>
+</div>
+<!-- Bento Grid of Leads -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column: Unassigned Lead Feed -->
+<div class="lg:col-span-8 space-y-4">
+<div class="flex justify-between items-center px-2">
+<h3 class="font-h2 text-lg text-slate-700">Unassigned Leads <span class="text-blue-500 font-normal ml-1">(24)</span></h3>
+<div class="flex items-center gap-2 text-xs text-slate-400 font-label-caps">
+                            SORT BY: <span class="text-blue-600 font-bold cursor-pointer">LATEST</span>
+</div>
+</div>
+<!-- Lead Card 1 -->
+<div class="bg-white rounded-[16px] p-6 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] border border-blue-100/10 hover:border-blue-100 transition-all group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 font-bold text-lg">JS</div>
+<div>
+<h4 class="font-h2 text-body-md text-on-background">Jordan Smith</h4>
+<p class="text-slate-400 text-xs font-body-md">Acme Corp • $12,500 Potential</p>
+</div>
+</div>
+<div class="bg-primary-container/10 px-3 py-1 rounded-full">
+<span class="text-primary font-label-caps text-[10px]">NEW INQUIRY</span>
+</div>
+</div>
+<p class="text-slate-500 font-body-md text-sm line-clamp-2 mb-6">"Looking for a full-suite CRM implementation for our sales department of 45 people. Need integration with existing Slack and Zendesk workflows."</p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50">
+<div class="flex gap-4">
+<div class="flex items-center gap-1.5 text-slate-400">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-xs font-body-md">2h ago</span>
+</div>
+<div class="flex items-center gap-1.5 text-slate-400">
+<span class="material-symbols-outlined text-lg" data-icon="alternate_email">alternate_email</span>
+<span class="text-xs font-body-md">Email</span>
+</div>
+</div>
+<div class="relative inline-block text-left group/dropdown">
+<button class="bg-secondary-container/50 text-on-secondary-container px-4 py-2 rounded-xl text-xs font-bold hover:bg-secondary-container transition-colors flex items-center gap-2">
+                                    Assign To Team
+                                    <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</button>
+<!-- Dropdown Mockup on Hover -->
+<div class="absolute right-0 bottom-full mb-2 w-56 opacity-0 group-hover/dropdown:opacity-100 pointer-events-none group-hover/dropdown:pointer-events-auto transition-all bg-white rounded-xl shadow-xl border border-blue-100/20 py-2 z-50">
+<div class="px-3 py-2 text-[10px] font-label-caps text-slate-400 border-b border-slate-50 mb-1">AVAILABLE AGENTS</div>
+<button class="w-full px-4 py-2 flex items-center gap-3 hover:bg-blue-50 transition-colors">
+<img alt="" class="w-6 h-6 rounded-full" data-alt="Portrait of a female sales executive with a friendly smile, soft natural bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgB0BHQA3qgNR5vzBPDbBZttyuKz-LXRL30217Vmh6HD_bG2wONkgdLiHkdB99fb200of6rm6fDMy1Wb52kWTzjrh0XPm-g6ZuZtlIhZJHzTm9WbVPqzegvDeZUC8egkfpVSMurutNtc-DCOjtY6aoynM_jylPNqTwzYgfzSdxMKCA5yHZxXxdiXqSgakGTmnwA5iJcBkzeF0T_xPL3uL8sitnup1unw97jObn05YX4IO6L30DD5tRG0aVtxdl6v6iZJ21z4sEf6t4"/>
+<span class="text-xs font-medium text-slate-700">Sarah Chen</span>
+<span class="ml-auto w-1.5 h-1.5 rounded-full bg-green-500"></span>
+</button>
+<button class="w-full px-4 py-2 flex items-center gap-3 hover:bg-blue-50 transition-colors">
+<img alt="" class="w-6 h-6 rounded-full" data-alt="Close up of a professional man in business casual attire with a blurred office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSLp6ufXWxrodQxjnp71B4fIFS2aGaBdw80IU26SnDCCqNL_YN2UI3snZyWUG3i8sU58pKxrls6-yqiRspzh0G-SQJdvh1CNvcjdpZd0HCojUCUJzZ1k3whtal9aKSVkPHg22UbuGWK1x_SBhIIDR0bcPQ4RuphH4rCkKAmjU7_G3DYh8gtEDSU67HelU2ty-RksHeUvlHbIif0jOf8sUKQFk11MdMdBlV57lgOAMnuWL3n0DZMTT0r0GdNvg5SqpBp1mL4VOArU0g"/>
+<span class="text-xs font-medium text-slate-700">Marcus Wright</span>
+<span class="ml-auto w-1.5 h-1.5 rounded-full bg-green-500"></span>
+</button>
+<button class="w-full px-4 py-2 flex items-center gap-3 hover:bg-blue-50 transition-colors">
+<img alt="" class="w-6 h-6 rounded-full" data-alt="Corporate headshot of a diverse team member against a neutral grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0BfcT8whoc7o3UdCCFRrwPpaQbmIblfI7beNeMnc89KrJKXvMqlnMpoSBCXk7Ub0e4-S6x80ZUFqk3s5gwEGvizMARlFpnnQRlqoecjHMVvazv0LBhqmrYDfcIlz0es311M7BtsWMpiz-jfCf-b7fGYXCSkiNnIlmOtC4dOQdNVVE-VQXIKGpfHjg9cS-f2mitWAEuqhi1KNSGqlZbI0aQhihoR5hxqkIeOCwNq3soU007Vq0T41b1K88jK6-YGTi-pDoouQ9gWRq"/>
+<span class="text-xs font-medium text-slate-700">David Low</span>
+<span class="ml-auto w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Lead Card 2 -->
+<div class="bg-white rounded-[16px] p-6 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] border border-blue-100/10 hover:border-blue-100 transition-all">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 font-bold text-lg">EO</div>
+<div>
+<h4 class="font-h2 text-body-md text-on-background">Elena Ortiz</h4>
+<p class="text-slate-400 text-xs font-body-md">Visionary Labs • $8,200 Potential</p>
+</div>
+</div>
+<div class="bg-tertiary-container/10 px-3 py-1 rounded-full">
+<span class="text-tertiary font-label-caps text-[10px]">URGENT RE-TOUCH</span>
+</div>
+</div>
+<p class="text-slate-500 font-body-md text-sm line-clamp-2 mb-6">"Previous inquiry from last month. Client expressed renewed interest after watching the Q4 demo. High priority for closing this week."</p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50">
+<div class="flex gap-4">
+<div class="flex items-center gap-1.5 text-slate-400">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-xs font-body-md">5h ago</span>
+</div>
+<div class="flex items-center gap-1.5 text-slate-400">
+<span class="material-symbols-outlined text-lg" data-icon="call">call</span>
+<span class="text-xs font-body-md">Direct Line</span>
+</div>
+</div>
+<button class="bg-secondary-container/50 text-on-secondary-container px-4 py-2 rounded-xl text-xs font-bold hover:bg-secondary-container transition-colors flex items-center gap-2">
+                                Assign To Team
+                                <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Lead Card 3 -->
+<div class="bg-white rounded-[16px] p-6 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] border border-blue-100/10 hover:border-blue-100 transition-all opacity-70 grayscale-[0.5]">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-500 font-bold text-lg">BK</div>
+<div>
+<h4 class="font-h2 text-body-md text-on-background">Ben Knight</h4>
+<p class="text-slate-400 text-xs font-body-md">Self-Employed • $1,200 Potential</p>
+</div>
+</div>
+<div class="bg-slate-100 px-3 py-1 rounded-full">
+<span class="text-slate-500 font-label-caps text-[10px]">LOW PRIORITY</span>
+</div>
+</div>
+<p class="text-slate-500 font-body-md text-sm line-clamp-2 mb-6">"Quick question about the pricing tier for individual consultants. I'm mainly interested in the contact management features."</p>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50">
+<div class="flex gap-4">
+<div class="flex items-center gap-1.5 text-slate-400">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-xs font-body-md">Yesterday</span>
+</div>
+</div>
+<button class="bg-secondary-container/50 text-on-secondary-container px-4 py-2 rounded-xl text-xs font-bold hover:bg-secondary-container transition-colors flex items-center gap-2">
+                                Assign To Team
+                                <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Agent Availability & Quick Stats -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Team Status Card -->
+<div class="bg-white rounded-[16px] p-6 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] border border-blue-100/10">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-h2 text-lg text-slate-700">Team Workload</h3>
+<span class="material-symbols-outlined text-blue-400" data-icon="monitoring">monitoring</span>
+</div>
+<div class="space-y-6">
+<!-- Agent 1 -->
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="" class="w-10 h-10 rounded-full" data-alt="Portrait of Sarah Chen, sales executive" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKoBkPIcTpwLGz-0FUdfTCW3EqkG7Ih0oySpN82tyDhL0kM4VjLaIpHDWIins9vlct6VS1epSpTqy5_9bOjnif3EKaZXv8Hqwlce7HkCegVCouQeKc1fj0csmli8vZ3TedO_GWXGRzmS20W9UmqcPsdtlxHxX_yjhzfYf9gIE1K-ydqiLmPQPaKgGTB1xGMr5Y9a4V3X8Q6HiR2LEeEZPfDZW168taSOulHV6lK_pV-JOiR63uoVQYnbl2RNJuSq6K9fHejqkblW9A"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-bold text-slate-700">Sarah Chen</span>
+<span class="text-xs text-slate-400">4/10 Leads</span>
+</div>
+<div class="w-full h-1.5 bg-slate-50 rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full rounded-full" style="width: 40%"></div>
+</div>
+</div>
+</div>
+<!-- Agent 2 -->
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="" class="w-10 h-10 rounded-full" data-alt="Portrait of Marcus Wright, account manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwO5Bc00_dCjV0RXPPQk3KvcmEwfPGYNdHjW8YgxpETCwetql0D4KfLpSreEPw0Ec9aHTl6uvkc_Jr7lz47wuwdKc_seKRdYIotMjeXPHSgH6i7LTY6-ipMW5IhVuFPSyA7CmNMMOmpRigyn-c22Q39Hwo585qPNJrMYQBVawNDnh-_noNiEeQrpQNeID1NYROKNr9DsPUfx_b4sYoRI3ya131Fs2lZRWIMssndXRwmeUGXA_HiKTiiJfwigdZQMOmdPhWSsPLvvDJ"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-bold text-slate-700">Marcus Wright</span>
+<span class="text-xs text-slate-400">8/10 Leads</span>
+</div>
+<div class="w-full h-1.5 bg-slate-50 rounded-full overflow-hidden">
+<div class="bg-amber-400 h-full rounded-full" style="width: 80%"></div>
+</div>
+</div>
+</div>
+<!-- Agent 3 -->
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="" class="w-10 h-10 rounded-full" data-alt="Portrait of David Low, sales representative" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPATBX4Cx26kKAPF5B9xtdKofCQti8KevzmQYmN96qneTqoAzRI81KE41H6Fy4OBGjqILl-9iniSUy8kDGCotixeRBgo3m70CLo7zEClH5T52iRhvdxbZtvt8yaj7TZGQDlSlgdQPXzUSALn64Tp8VwZmxzxwUre8R80Wx8UwBuh7DqxnJWsc4WNHahQYWcQrfWH-5svM9jRFPjN8OmpNF-OH2NgH1pVKvDAqO3cb6hV1KFBMHAuqxrLVM_H5UwU61bFFyhImf_DK8"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-amber-400 border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-bold text-slate-700">David Low</span>
+<span class="text-xs text-slate-400">2/10 Leads</span>
+</div>
+<div class="w-full h-1.5 bg-slate-50 rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full rounded-full" style="width: 20%"></div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-3 text-blue-600 font-bold text-xs font-label-caps border border-blue-100 rounded-xl hover:bg-blue-50 transition-colors tracking-widest">
+                            VIEW ALL TEAM MEMBERS
+                        </button>
+</div>
+<!-- Bulk Assign Actions Card -->
+<div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[16px] p-6 text-white shadow-xl relative overflow-hidden">
+<!-- Decorative glow -->
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+<h3 class="font-h2 text-lg mb-2 relative z-10">Smart Distribution</h3>
+<p class="text-blue-100 text-xs mb-6 relative z-10 leading-relaxed">Let MetaCRM automatically assign all 24 leads based on current agent workload and specialization.</p>
+<div class="space-y-3 relative z-10">
+<button class="w-full py-3 bg-white text-blue-700 font-bold rounded-xl text-sm shadow-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="bolt" data-weight="fill">bolt</span>
+                                Auto-Assign All
+                            </button>
+<button class="w-full py-3 bg-white/10 text-white font-bold rounded-xl text-sm border border-white/20 hover:bg-white/20 transition-all">
+                                Custom Bulk Rules
+                            </button>
+</div>
+</div>
+<!-- Activity Log Mini -->
+<div class="bg-white rounded-[16px] p-6 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] border border-blue-100/10">
+<h3 class="font-h2 text-sm text-slate-400 font-label-caps mb-4 uppercase tracking-wider">RECENT ASSIGNMENTS</h3>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="relative">
+<div class="w-[1px] h-full bg-blue-50 absolute left-1/2 top-0"></div>
+<div class="w-2 h-2 rounded-full bg-blue-500 relative z-10 mt-1.5 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
+</div>
+<div>
+<p class="text-xs text-slate-700"><strong>Sarah</strong> assigned to <strong>Acme Corp</strong></p>
+<p class="text-[10px] text-slate-400 mt-0.5">2 minutes ago</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="relative">
+<div class="w-[1px] h-full bg-blue-50 absolute left-1/2 top-0"></div>
+<div class="w-2 h-2 rounded-full bg-blue-500 relative z-10 mt-1.5 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
+</div>
+<div>
+<p class="text-xs text-slate-700"><strong>Marcus</strong> assigned to <strong>Visionary Labs</strong></p>
+<p class="text-[10px] text-slate-400 mt-0.5">14 minutes ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

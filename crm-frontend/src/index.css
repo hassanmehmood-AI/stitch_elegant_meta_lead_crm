@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-surface:                     #fbf8ff;
+    --color-surface-container-low:       #f4f2ff;
+    --color-surface-container:           #eeecfc;
+    --color-on-surface:                  #1a1b25;
+    --color-on-surface-variant:          #444557;
+    --color-primary:                     #0015cd;
+    --color-primary-container:           #1b2efd;
+    --color-on-primary:                  #ffffff;
+    --color-secondary:                   #505f76;
+    --color-error:                       #ba1a1a;
+    --shadow-card:       0 8px 40px -10px rgba(27,46,253,0.04);
+    --shadow-card-hover: 0 12px 48px -8px rgba(27,46,253,0.08);
+  }
+
+  body {
+    font-family: "Manrope", sans-serif;
+    background-color: #fbf8ff;
+    color: #1a1b25;
+    margin: 0;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(27, 46, 253, 0.08);
+    box-shadow: 0 40px 60px -15px rgba(27, 46, 253, 0.03);
+  }
+
+  .bento-card {
+    background: #ffffff;
+    border: 1px solid rgba(27, 46, 253, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 40px 60px -15px rgba(27, 46, 253, 0.03);
+    transition: all 0.3s ease;
+  }
+
+  .bento-card:hover {
+    border-color: rgba(27, 46, 253, 0.2);
+    box-shadow: 0 45px 70px -10px rgba(27, 46, 253, 0.06);
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #eeecfc; border-radius: 10px; }

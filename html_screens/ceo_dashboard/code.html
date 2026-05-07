@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dad8e8",
+                        "on-tertiary-container": "#ffbbae",
+                        "on-background": "#1a1b25",
+                        "surface-container-low": "#f4f2ff",
+                        "tertiary-fixed-dim": "#ffb4a5",
+                        "background": "#fbf8ff",
+                        "on-primary-fixed": "#000668",
+                        "on-primary-container": "#c4c7ff",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-surface-variant": "#444557",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "inverse-on-surface": "#f1effe",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#8e1400",
+                        "surface-tint": "#2d3eff",
+                        "surface-container-highest": "#e3e1f0",
+                        "primary-fixed": "#e0e0ff",
+                        "inverse-primary": "#bdc2ff",
+                        "secondary": "#505f76",
+                        "surface-container-high": "#e8e6f6",
+                        "outline-variant": "#c5c5da",
+                        "surface-bright": "#fbf8ff",
+                        "secondary-container": "#d0e1fb",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1b25",
+                        "on-secondary-container": "#54647a",
+                        "outline": "#757589",
+                        "primary-container": "#1b2efd",
+                        "inverse-surface": "#2f2f3b",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "tertiary-fixed": "#ffdad3",
+                        "tertiary-container": "#aa1a00",
+                        "surface-variant": "#e3e1f0",
+                        "primary": "#0015cd",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#0018e4",
+                        "surface-container": "#eeecfc",
+                        "surface": "#fbf8ff",
+                        "tertiary": "#7f1100",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary-fixed": "#3e0400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "2rem",
+                        "gutter": "1.5rem",
+                        "unit": "4px",
+                        "sm": "1rem",
+                        "xs": "0.5rem",
+                        "md": "1.5rem",
+                        "container-padding": "2.5rem",
+                        "xl": "3rem"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "500"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
+        .ambient-shadow { shadow: 0 40px 60px -15px rgba(27, 46, 253, 0.03); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #eeecfc; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="docked left-0 h-screen w-64 border-r border-blue-100/20 bg-slate-50/50 backdrop-blur-md shadow-[40px_0_60px_-15px_rgba(27,46,253,0.03)] flex flex-col py-6 px-4 z-50">
+<div class="mb-10 px-2">
+<h1 class="text-xl font-bold text-blue-700 tracking-tight">MetaCRM</h1>
+<p class="text-[10px] font-label-caps text-slate-400 uppercase tracking-widest mt-1">Lead Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active State: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-blue-700 bg-blue-50/50 font-semibold border-r-4 border-blue-600 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-manrope text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-blue-600 hover:bg-blue-50/30 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span class="font-manrope text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-blue-600 hover:bg-blue-50/30 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_ind">assignment_ind</span>
+<span class="font-manrope text-sm font-medium">Assigned Leads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-blue-600 hover:bg-blue-50/30 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-manrope text-sm font-medium">Team</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-blue-600 hover:bg-blue-50/30 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-manrope text-sm font-medium">Meetings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-blue-600 hover:bg-blue-50/30 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-manrope text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-blue-100/10 flex items-center gap-3 px-2">
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full border-2 border-blue-100 shadow-sm object-cover" data-alt="Close-up professional portrait of a confident executive male in a tailored suit against a clean studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0K26wGV-IIAXOO7apqlqLtgdIC6ShN_bWLBHYc6DJg1L7TtRjU-dVB44Ch0grwVGEg4jRdnYlKEk4Y8pxCmmqFLCFQ5wKc6384ogCjHSkJPos55we60w1HrDnf0PsV5Ef5pdzho7Wd8XDVJy7bQHWiYv4EWuBH9XL3mFhS5lwQmWFbjxPq1WzV3XqdQiH5v0PHuEaJBaUlw3f0c1flcGvII7KRCj2wVcIgJpgh1iVpQjl6D4i6J2v92EYgvDyuACuQ_TQuTAVzbcj"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold text-on-surface truncate">Marcus Sterling</p>
+<p class="text-[11px] text-slate-400 truncate">Chief Executive Officer</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- Top Navbar -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full px-8 h-16 bg-white/80 backdrop-blur-xl border-b border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)]">
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-1.5 text-sm font-manrope focus:ring-2 focus:ring-blue-100 transition-all w-64 text-on-surface-variant outline-none" placeholder="Global analytic search..." readonly="" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-blue-600 transition-all relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<button class="text-slate-500 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-px bg-blue-100/50"></div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50/50">
+<div class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></div>
+<span class="text-xs font-bold text-blue-700 uppercase tracking-wider">Live Analytics</span>
+</div>
+</div>
+</header>
+<!-- Scrollable Dashboard Body -->
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<div class="max-w-[1440px] mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col gap-1">
+<h2 class="font-h1 text-h1 text-on-surface">CEO Insight Dashboard</h2>
+<p class="font-body-md text-slate-500">Real-time performance metrics and cross-departmental analytics for Q3.</p>
+</div>
+<!-- High-Level Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-white p-6 rounded-2xl border border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(27,46,253,0.08)] transition-all group">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 bg-blue-50 text-blue-600 rounded-lg material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">+12.4%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium mb-1">Total Revenue</p>
+<h3 class="text-2xl font-bold text-on-surface tracking-tight">$4,281,090</h3>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(27,46,253,0.08)] transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 bg-purple-50 text-purple-600 rounded-lg material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">+8.2%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium mb-1">Conversion Rate</p>
+<h3 class="text-2xl font-bold text-on-surface tracking-tight">24.8%</h3>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(27,46,253,0.08)] transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 bg-orange-50 text-orange-600 rounded-lg material-symbols-outlined" data-icon="person_add">person_add</span>
+<span class="text-xs font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded-full">Static</span>
+</div>
+<p class="text-slate-500 text-sm font-medium mb-1">New Leads</p>
+<h3 class="text-2xl font-bold text-on-surface tracking-tight">1,482</h3>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(27,46,253,0.08)] transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="p-2 bg-teal-50 text-teal-600 rounded-lg material-symbols-outlined" data-icon="speed">speed</span>
+<span class="text-xs font-bold text-error bg-error-container px-2 py-1 rounded-full">-2.1%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium mb-1">Avg. Close Time</p>
+<h3 class="text-2xl font-bold text-on-surface tracking-tight">14.2 Days</h3>
+</div>
+</div>
+<!-- Main Analytics Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Conversion Funnel Visualization -->
+<div class="lg:col-span-1 bg-white p-6 rounded-2xl border border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)] flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<h4 class="font-bold text-on-surface">Sales Pipeline Funnel</h4>
+<span class="material-symbols-outlined text-slate-300" data-icon="info">info</span>
+</div>
+<div class="flex-1 flex flex-col justify-center space-y-4 px-4">
+<!-- Funnel Stage 1 -->
+<div class="relative group">
+<div class="h-14 w-full bg-gradient-to-r from-blue-600 to-blue-400 rounded-xl flex items-center justify-between px-6 text-white shadow-lg">
+<span class="font-medium">Awareness</span>
+<span class="font-bold">12,400</span>
+</div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-b border-r border-blue-100/50"></div>
+</div>
+<!-- Funnel Stage 2 -->
+<div class="relative w-[85%] mx-auto">
+<div class="h-14 w-full bg-gradient-to-r from-blue-500 to-blue-300 rounded-xl flex items-center justify-between px-6 text-white opacity-90">
+<span class="font-medium">Interest</span>
+<span class="font-bold">8,120</span>
+</div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-b border-r border-blue-100/50"></div>
+</div>
+<!-- Funnel Stage 3 -->
+<div class="relative w-[70%] mx-auto">
+<div class="h-14 w-full bg-gradient-to-r from-blue-400 to-blue-200 rounded-xl flex items-center justify-between px-6 text-white opacity-80">
+<span class="font-medium">Consideration</span>
+<span class="font-bold">3,200</span>
+</div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-b border-r border-blue-100/50"></div>
+</div>
+<!-- Funnel Stage 4 -->
+<div class="relative w-[55%] mx-auto">
+<div class="h-14 w-full bg-gradient-to-r from-blue-300 to-blue-100 rounded-xl flex items-center justify-between px-6 text-blue-900 opacity-70">
+<span class="font-medium">Closed</span>
+<span class="font-bold">942</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-blue-50 flex justify-between items-center text-xs text-slate-400 font-bold uppercase tracking-widest">
+<span>Efficiency Index</span>
+<span class="text-blue-600">Premium High</span>
+</div>
+</div>
+<!-- Manager Performance Chart -->
+<div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)]">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="font-bold text-on-surface">Regional Manager Benchmarking</h4>
+<p class="text-xs text-slate-400">Comparing lead quality vs. conversion volume</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-blue-600"></span>
+<span class="text-xs text-slate-500 font-medium">Leads</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-blue-200"></span>
+<span class="text-xs text-slate-500 font-medium">Conversions</span>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<!-- Manager Row 1 -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-on-surface">Sarah Jenkins (West Coast)</span>
+<span class="text-xs font-bold text-blue-700">92% Target</span>
+</div>
+<div class="h-3 w-full bg-slate-50 rounded-full overflow-hidden flex">
+<div class="h-full bg-blue-600 rounded-full" style="width: 78%"></div>
+<div class="h-full bg-blue-200" style="width: 14%"></div>
+</div>
+</div>
+<!-- Manager Row 2 -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-on-surface">David Chen (APAC)</span>
+<span class="text-xs font-bold text-blue-700">105% Target</span>
+</div>
+<div class="h-3 w-full bg-slate-50 rounded-full overflow-hidden flex">
+<div class="h-full bg-blue-600 rounded-full" style="width: 85%"></div>
+<div class="h-full bg-blue-200" style="width: 20%"></div>
+</div>
+</div>
+<!-- Manager Row 3 -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-on-surface">Elara Vance (EMEA)</span>
+<span class="text-xs font-bold text-blue-700">84% Target</span>
+</div>
+<div class="h-3 w-full bg-slate-50 rounded-full overflow-hidden flex">
+<div class="h-full bg-blue-600 rounded-full" style="width: 62%"></div>
+<div class="h-full bg-blue-200" style="width: 22%"></div>
+</div>
+</div>
+<!-- Manager Row 4 -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-on-surface">Thomas Wright (East Coast)</span>
+<span class="text-xs font-bold text-blue-700">98% Target</span>
+</div>
+<div class="h-3 w-full bg-slate-50 rounded-full overflow-hidden flex">
+<div class="h-full bg-blue-600 rounded-full" style="width: 80%"></div>
+<div class="h-full bg-blue-200" style="width: 18%"></div>
+</div>
+</div>
+</div>
+<div class="mt-12 bg-primary-50/30 p-4 rounded-xl border border-blue-100/20 flex gap-4 items-start">
+<span class="material-symbols-outlined text-blue-600" data-icon="auto_awesome">auto_awesome</span>
+<div>
+<p class="text-sm font-bold text-blue-800">AI Insight:</p>
+<p class="text-xs text-blue-700/80 leading-relaxed">David Chen's team is showing high efficiency in lead processing. Consider applying APAC lead qualification protocols to the EMEA region to bridge the 21% gap.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Employee Activity Summary Table -->
+<div class="bg-white rounded-2xl border border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)] overflow-hidden">
+<div class="px-6 py-5 border-b border-blue-50 flex items-center justify-between">
+<h4 class="font-bold text-on-surface">Active Sales Personnel Performance</h4>
+<div class="flex gap-2">
+<span class="text-xs font-bold text-slate-400 border border-slate-200 rounded px-2 py-1">LAST 30 DAYS</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50/50 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<th class="px-6 py-4">Personnel</th>
+<th class="px-6 py-4">Active Leads</th>
+<th class="px-6 py-4">Total Value</th>
+<th class="px-6 py-4">Success Rate</th>
+<th class="px-6 py-4 text-center">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-blue-50">
+<tr class="hover:bg-blue-50/20 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-600 text-xs">RJ</div>
+<div>
+<p class="font-bold text-on-surface">Robert Janson</p>
+<p class="text-[11px] text-slate-400">Senior Account Exec</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-on-surface">142</td>
+<td class="px-6 py-4 font-bold text-blue-700">$1.2M</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-green-500" style="width: 82%"></div>
+</div>
+<span class="text-xs font-bold text-green-600">82%</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<span class="px-2 py-1 rounded-full bg-green-100/50 text-green-700 text-[10px] font-bold tracking-tight">EXCEEDING</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-blue-50/20 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-600 text-xs">LM</div>
+<div>
+<p class="font-bold text-on-surface">Linda Meyer</p>
+<p class="text-[11px] text-slate-400">Inside Sales Manager</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-on-surface">98</td>
+<td class="px-6 py-4 font-bold text-blue-700">$840K</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-blue-500" style="width: 65%"></div>
+</div>
+<span class="text-xs font-bold text-blue-600">65%</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<span class="px-2 py-1 rounded-full bg-blue-100/50 text-blue-700 text-[10px] font-bold tracking-tight">ON TRACK</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-blue-50/20 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center font-bold text-purple-600 text-xs">KS</div>
+<div>
+<p class="font-bold text-on-surface">Kevin Smith</p>
+<p class="text-[11px] text-slate-400">Strategic Partnerships</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-on-surface">210</td>
+<td class="px-6 py-4 font-bold text-blue-700">$2.4M</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-green-500" style="width: 91%"></div>
+</div>
+<span class="text-xs font-bold text-green-600">91%</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<span class="px-2 py-1 rounded-full bg-green-100/50 text-green-700 text-[10px] font-bold tracking-tight">EXCEEDING</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Footer Stats -->
+<div class="flex justify-between items-center text-slate-400 text-xs font-medium pb-8">
+<p>MetaCRM v4.8.2-alpha - Internal CEO Portal</p>
+<p>Calculated at 09:42 AM PST, Oct 24, 2023</p>
+</div>
+</div>
+</div>
+</main>
+</body></html>

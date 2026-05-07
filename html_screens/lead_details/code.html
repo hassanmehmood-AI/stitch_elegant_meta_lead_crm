@@ -1,0 +1,361 @@
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #fbf8ff;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dad8e8",
+                        "on-tertiary-container": "#ffbbae",
+                        "on-background": "#1a1b25",
+                        "surface-container-low": "#f4f2ff",
+                        "tertiary-fixed-dim": "#ffb4a5",
+                        "background": "#fbf8ff",
+                        "on-primary-fixed": "#000668",
+                        "on-primary-container": "#c4c7ff",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-surface-variant": "#444557",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "inverse-on-surface": "#f1effe",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#8e1400",
+                        "surface-tint": "#2d3eff",
+                        "surface-container-highest": "#e3e1f0",
+                        "primary-fixed": "#e0e0ff",
+                        "inverse-primary": "#bdc2ff",
+                        "secondary": "#505f76",
+                        "surface-container-high": "#e8e6f6",
+                        "outline-variant": "#c5c5da",
+                        "surface-bright": "#fbf8ff",
+                        "secondary-container": "#d0e1fb",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1b25",
+                        "on-secondary-container": "#54647a",
+                        "outline": "#757589",
+                        "primary-container": "#1b2efd",
+                        "inverse-surface": "#2f2f3b",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "tertiary-fixed": "#ffdad3",
+                        "tertiary-container": "#aa1a00",
+                        "surface-variant": "#e3e1f0",
+                        "primary": "#0015cd",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#0018e4",
+                        "surface-container": "#eeecfc",
+                        "surface": "#fbf8ff",
+                        "tertiary": "#7f1100",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary-fixed": "#3e0400"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "500"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="docked left-0 h-screen w-64 border-r border-blue-100/20 bg-slate-50/50 backdrop-blur-md shadow-[40px_0_60px_-15px_rgba(27,46,253,0.03)] flex flex-col py-6 px-4 z-50">
+<div class="mb-10 px-2">
+<h1 class="text-xl font-bold text-blue-700 tracking-tight">MetaCRM</h1>
+<p class="text-xs text-slate-500 font-medium">Lead Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-blue-700 bg-blue-50/50 font-semibold border-r-4 border-blue-600 font-manrope text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span>Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_ind">assignment_ind</span>
+<span>Assigned Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Team</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span>Meetings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-blue-50/30 hover:text-blue-600 transition-colors duration-200 font-manrope text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-blue-100 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional headshot of a smiling male CRM manager in a well-lit modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEdr8rkWowosXq0S47aFT3PpMfq8sCifc_z4PmNqDPYcA4bY8QBViMh2StQBfyWZcUATr05NK7uK6c3O9xlGshOthA1nmx47umeu_-7IfEuJbDzoD8T-aIOwN-CbcZ9TLRN7CNEegiT6Uo9eh_PBn3CcQL4nHaN4OAyVrVmMhDDTk03juM35cqswLf-RvJjDbFf6Uk65S0AVpH4d4r9Z-0-6Z4e0YiQe9RZZ9_ztvybCAmhKaDbXe-VSHcXfK0eZDNiU9R119K0iPH"/>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Alex Rivera</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-wider">Senior Agent</p>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto relative">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full px-8 h-16 bg-white/80 backdrop-blur-xl border-b border-blue-100/10 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)]">
+<div class="flex items-center gap-4 flex-1">
+<button class="md:hidden p-2 text-slate-500"><span class="material-symbols-outlined" data-icon="menu">menu</span></button>
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-neutral-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-blue-100 transition-all" placeholder="Search leads, tasks, or agents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 hover:text-blue-600 cursor-pointer transition-all" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-blue-600 cursor-pointer transition-all" data-icon="help_outline">help_outline</span>
+</div>
+<div class="h-8 w-[1px] bg-blue-100/20"></div>
+<div class="flex items-center gap-4">
+<button class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-all">Role Indicator</button>
+<button class="bg-primary-container text-white px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-blue-500/20 hover:scale-105 active:scale-95 transition-all">Add Lead</button>
+</div>
+</div>
+</header>
+<!-- Lead Detail Canvas -->
+<div class="p-container-padding max-w-[1440px] mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-2xl font-bold shadow-xl shadow-blue-200">
+                                JD
+                            </div>
+<div>
+<div class="flex items-center gap-3">
+<h2 class="font-h2 text-h2 text-on-surface">Julianne DeMarco</h2>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold uppercase tracking-wider">New Lead</span>
+</div>
+<div class="flex items-center gap-4 mt-1 text-slate-500 text-sm">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base" data-icon="mail">mail</span> julianne.d@enterprise-solutions.com</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base" data-icon="call">call</span> +1 (555) 012-9984</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex flex-col gap-1 mr-4">
+<span class="text-[10px] font-bold text-slate-400 uppercase">Lead Source</span>
+<div class="flex items-center gap-2 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-blue-600" data-icon="language">language</span>
+                                Organic Search
+                            </div>
+</div>
+<div class="relative group">
+<button class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-blue-100/50 shadow-sm text-sm font-bold text-on-surface-variant hover:border-blue-300 transition-all">
+<span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+                                Change Status
+                                <span class="material-symbols-outlined text-base" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-base" data-icon="edit">edit</span>
+                            Edit Lead
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Activity & Timeline -->
+<div class="lg:col-span-8 space-y-gutter">
+<!-- Activity Timeline Card -->
+<div class="bg-white rounded-[16px] p-8 border border-blue-100/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] relative overflow-hidden">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-h2 text-[20px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600" data-icon="history">history</span>
+                                    Activity Timeline
+                                </h3>
+<button class="text-blue-600 text-sm font-bold hover:underline">View All</button>
+</div>
+<div class="relative ml-4">
+<!-- Vertical Line -->
+<div class="absolute left-[11px] top-2 bottom-2 w-px bg-blue-100/50"></div>
+<!-- Timeline Item -->
+<div class="relative pl-10 pb-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-blue-50 border-4 border-white shadow-sm flex items-center justify-center ring-1 ring-blue-100">
+<span class="w-2 h-2 rounded-full bg-blue-600"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-surface">Introductory Discovery Call</span>
+<span class="text-xs text-slate-400">Today, 10:45 AM</span>
+</div>
+<p class="text-sm text-slate-500 mt-1">Lead expressed interest in Enterprise Tier pricing and multi-regional support. Scheduled follow-up for next Tuesday.</p>
+<div class="mt-3 bg-slate-50/50 rounded-xl p-3 border border-slate-100">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm text-blue-600" data-icon="notes">notes</span>
+<span class="text-[11px] font-bold text-slate-400 uppercase">Call Outcome Notes</span>
+</div>
+<p class="text-sm italic text-slate-600">"Strong intent, budget approved for Q3. Primary concern is data migration timeline."</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-10 pb-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-blue-50 border-4 border-white shadow-sm flex items-center justify-center ring-1 ring-blue-100">
+<span class="w-2 h-2 rounded-full bg-blue-400"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-surface">Email Engagement</span>
+<span class="text-xs text-slate-400">Yesterday, 4:20 PM</span>
+</div>
+<p class="text-sm text-slate-500 mt-1">Lead clicked on "Security &amp; Compliance Whitepaper" link in automated welcome sequence.</p>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-blue-50 border-4 border-white shadow-sm flex items-center justify-center ring-1 ring-blue-100">
+<span class="w-2 h-2 rounded-full bg-blue-300"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-bold text-on-surface">Lead Created</span>
+<span class="text-xs text-slate-400">Oct 24, 2023, 11:02 AM</span>
+</div>
+<p class="text-sm text-slate-500 mt-1">Automated capture from enterprise-solutions.com contact form.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Notes & Comments Card -->
+<div class="bg-white rounded-[16px] p-8 border border-blue-100/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)]">
+<h3 class="font-h2 text-[20px] text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600" data-icon="forum">forum</span>
+                                Internal Team Notes
+                            </h3>
+<div class="space-y-4 mb-6">
+<div class="flex gap-4 p-4 rounded-2xl bg-surface-container-low border border-blue-50/50">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="close-up portrait of a young female marketing professional with a friendly expression in a soft-lit creative studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsZOX2DpCu9ppUvy2g7csmQGnPeDphROfFuAsDdFkyPTRszIcYOD84rqhTRZIOHi88iJk7-trjwWM5fHSIX5oUXLq-Vw3A3NZMvIrkC4CVioBkuGRyPCX0LhqFBuG4rJfOO92wpg4oBbnZj6zRm-ka-VIITXdIcaD8iZQecHvvHjjxZ1Q2xK9vyJifLcQF_N-OSPYhi8xwxZw52rWQFhcpPEGqeRWjt4dgPBJYgOM_lIeD07njHRzqDRMorjEUbLCZlI-wFklvApV5"/>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-sm font-bold text-on-surface">Sarah Chen</span>
+<span class="text-[10px] text-slate-400">2 hours ago</span>
+</div>
+<p class="text-sm text-on-surface-variant">Referred by our partner contact at Global Nexus. Make sure to mention the bundled implementation package.</p>
+</div>
+</div>
+</div>
+<div class="relative">
+<textarea class="w-full p-4 bg-neutral-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-blue-100 transition-all resize-none" placeholder="Add a private note for the team..." rows="3"></textarea>
+<div class="absolute bottom-3 right-3">
+<button class="bg-blue-600 text-white p-2 rounded-xl shadow-lg hover:bg-blue-700 transition-all">
+<span class="material-symbols-outlined text-base" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Details & Insights -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Lead Score Card -->
+<div class="bg-gradient-to-br from-primary-container to-blue-800 rounded-[16px] p-8 text-white shadow-xl shadow-blue-200">
+<h4 class="text-white/70 text-sm font-bold uppercase tracking-widest mb-4">Lead Health Score</h4>
+<div class="flex items-center justify-between">
+<div class="text-5xl font-black">88<span class="text-xl font-medium opacity-50">/100</span></div>
+<div class="w-16 h-16 rounded-full border-4 border-white/20 flex items-center justify-center relative">
+<div class="absolute inset-0 rounded-full border-4 border-white border-t-transparent animate-spin-slow" style="border-width: 4px; border-style: solid; border-image: initial;"></div>
+<span class="material-symbols-outlined text-3xl" data-icon="trending_up">trending_up</span>
+</div>
+</div>
+<p class="mt-4 text-sm text-blue-100 font-medium">High conversion probability based on engagement frequency and company size.</p>
+</div>
+<!-- Lead Summary Details -->
+<div class="bg-white rounded-[16px] p-8 border border-blue-100/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)]">
+<h3 class="font-h2 text-[18px] text-on-surface mb-6">Lead Summary</h3>
+<div class="space-y-6">
+<div class="flex justify-between items-start border-b border-slate-50 pb-4">
+<div>
+<span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Company</span>
+<span class="font-bold text-on-surface">Enterprise Solutions Ltd.</span>
+</div>
+<span class="material-symbols-outlined text-slate-300" data-icon="corporate_fare">corporate_fare</span>
+</div>
+<div class="flex justify-between items-start border-b border-slate-50 pb-4">
+<div>
+<span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Estimated Value</span>
+<span class="font-bold text-on-surface">$45,000 /yr</span>
+</div>
+<span class="material-symbols-outlined text-slate-300" data-icon="payments">payments</span>
+</div>
+<div class="flex justify-between items-start border-b border-slate-50 pb-4">
+<div>
+<span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Assigned Agent</span>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-6 h-6 rounded-full bg-blue-100 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a confident male sales executive with warm lighting and a neutral blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbAfd603ENilE761X9VkzOvb1RUM0jtHe7MZsQpDUUTwGPITJ5c7Jy4liB0QLvOoLwrGpEXGb0rYLxCmIuA8zce2x0DJBhDN0G_f9AR1-MlzAiaF9u6aQMICkKKzwrxE9GzkaghFYTAumT-xtuMxH4J9SGLlfm0nduq2DjdYTKLXpmM1vGvjKrQiGEyWRbV_BZ3f-1BJqqDUVrOnzB6QAMtduMwir-ihYf2mHxJKKItzAyDgHvWWH_-aGafnnH3dAryYDis_vlRitR"/>
+</div>
+<span class="font-bold text-on-surface">Alex Rivera</span>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Last Interaction</span>
+<span class="font-bold text-on-surface">Today, 10:45 AM</span>
+</div>
+<span class="material-symbols-outlined text-slate-300" data-icon="schedule">schedule</span>
+</div>
+</div>
+</div>
+<!-- Tags Section -->
+<div class="bg-white rounded-[16px] p-8 border border-blue-100/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)]">
+<h3 class="font-h2 text-[18px] text-on-surface mb-4">Tags</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-bold border border-blue-100/50">Enterprise</span>
+<span class="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-100/50">High-Priority</span>
+<span class="px-3 py-1.5 rounded-lg bg-amber-50 text-amber-700 text-xs font-bold border border-amber-100/50">Migration-Needed</span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-50 text-slate-500 text-xs font-bold border border-slate-200 dashed flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+                                    Add Tag
+                                </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

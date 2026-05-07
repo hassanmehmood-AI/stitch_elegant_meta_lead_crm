@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dad8e8",
+                        "on-background": "#1a1b25",
+                        "background": "#fbf8ff",
+                        "on-primary-container": "#c4c7ff",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#444557",
+                        "surface-container-highest": "#e3e1f0",
+                        "secondary": "#505f76",
+                        "surface-container-high": "#e8e6f6",
+                        "outline-variant": "#c5c5da",
+                        "surface-bright": "#fbf8ff",
+                        "secondary-container": "#d0e1fb",
+                        "on-surface": "#1a1b25",
+                        "outline": "#757589",
+                        "primary-container": "#1b2efd",
+                        "surface-variant": "#e3e1f0",
+                        "primary": "#0015cd",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eeecfc",
+                        "surface": "#fbf8ff",
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #fbf8ff;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid rgba(27, 46, 253, 0.1);
+            box-shadow: 0 40px 60px -15px rgba(27, 46, 253, 0.03);
+            border-radius: 16px;
+        }
+    </style>
+</head>
+
+<body class="text-on-surface">
+    <div
+        class="min-h-screen flex items-center justify-center p-6 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-5 relative">
+        <!-- Abstract Background Shapes -->
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-400/20 blur-[120px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-400/20 blur-[120px] pointer-events-none">
+        </div>
+
+        <div class="w-full max-w-md relative z-10">
+            <!-- Logo -->
+            <div class="text-center mb-10">
+                <div
+                    class="inline-flex items-center justify-center w-14 h-14 bg-primary-container rounded-2xl shadow-lg shadow-blue-200 mb-4 transform hover:scale-105 transition-transform duration-300">
+                    <span class="material-symbols-outlined text-white text-2xl" data-icon="hub">hub</span>
+                </div>
+                <h1 class="text-3xl font-bold text-blue-700 tracking-tight">Penta CRM</h1>
+                <p class="text-[10px] text-slate-400 font-label-caps uppercase tracking-widest mt-1">Lead Management
+                    Platform</p>
+            </div>
+
+            <!-- Card -->
+            <div
+                class="glass-card p-8 shadow-[0_30px_80px_-20px_rgba(27,46,253,0.12)] transform transition-all duration-300 hover:shadow-[0_40px_100px_-20px_rgba(27,46,253,0.15)]">
+                <h2 class="text-[22px] font-bold text-on-surface mb-1">Welcome back</h2>
+                <p class="text-sm text-slate-500 mb-8">Sign in to your account to continue.</p>
+
+                <!-- Demo role picker -->
+                <div class="mb-6">
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Select Role
+                        Demo</label>
+                    <div class="grid grid-cols-3 gap-2" id="role-picker">
+                        <button type="button" data-role="ceo"
+                            class="role-btn flex items-center gap-2 p-3 rounded-xl border-2 text-sm font-bold transition-all border-primary-container bg-blue-50/50 text-blue-700 shadow-sm">
+                            <span class="material-symbols-outlined text-base">business_center</span> CEO
+                        </button>
+                        <button type="button" data-role="manager"
+                            class="role-btn flex items-center gap-2 p-3 rounded-xl border-2 text-sm font-bold transition-all border-transparent bg-slate-50 text-slate-500 hover:border-blue-100 hover:bg-white shadow-sm">
+                            <span class="material-symbols-outlined text-base">manage_accounts</span> Manager
+                        </button>
+                        <button type="button" data-role="employee"
+                            class="role-btn flex items-center gap-2 p-3 rounded-xl border-2 text-sm font-bold transition-all border-transparent bg-slate-50 text-slate-500 hover:border-blue-100 hover:bg-white shadow-sm">
+                            <span class="material-symbols-outlined text-base">person</span> Employee
+                        </button>
+                    </div>
+                </div>
+
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <label
+                            class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Email</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">mail</span>
+                            <input type="email" placeholder="ceo@metacrm.com" value="ceo@metacrm.com"
+                                class="w-full pl-10 pr-3 py-3 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all shadow-inner"
+                                required />
+                        </div>
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Password</label>
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">lock</span>
+                            <input type="password" id="password-input" placeholder="••••••••" value="password"
+                                class="w-full pl-10 pr-10 py-3 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all shadow-inner"
+                                required />
+                            <button type="button" id="toggle-password"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none flex items-center justify-center">
+                                <span class="material-symbols-outlined text-sm">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" checked
+                                class="w-4 h-4 rounded accent-blue-600 border-slate-300 focus:ring-blue-500" />
+                            <span class="text-sm text-slate-500 group-hover:text-slate-700 transition-colors">Remember
+                                me</span>
+                        </label>
+                        <button type="button"
+                            class="text-sm font-bold text-blue-600 hover:text-blue-800 hover:underline transition-colors">Forgot
+                            password?</button>
+                    </div>
+                    <button type="submit"
+                        class="group w-full py-3 bg-primary-container text-white rounded-xl font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-blue-200 flex items-center justify-center gap-2 mt-4 hover:shadow-blue-300 hover:-translate-y-0.5">
+                        <span
+                            class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">login</span>
+                        Sign In
+                    </button>
+                </form>
+            </div>
+
+            <p class="text-center text-xs text-slate-400 mt-6">
+                © 2024 MetaCRM · All rights reserved
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let selectedRole = 'ceo';
+
+        const roleBtns = document.querySelectorAll('.role-btn');
+        const emailInput = document.querySelector('input[type="email"]');
+        const passwordInput = document.getElementById('password-input');
+        const togglePassword = document.getElementById('toggle-password');
+
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePassword.querySelector('span').textContent = type === 'password' ? 'visibility' : 'visibility_off';
+            });
+        }
+
+        roleBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Remove active classes
+                roleBtns.forEach(b => {
+                    b.classList.remove('border-primary-container', 'bg-blue-50/50', 'text-blue-700');
+                    b.classList.add('border-transparent', 'bg-slate-50', 'text-slate-500');
+                });
+                // Add active classes to selected
+                const currentBtn = e.currentTarget;
+                currentBtn.classList.remove('border-transparent', 'bg-slate-50', 'text-slate-500');
+                currentBtn.classList.add('border-primary-container', 'bg-blue-50/50', 'text-blue-700');
+
+                selectedRole = currentBtn.getAttribute('data-role');
+
+                // Pre-fill email for convenience
+                emailInput.value = selectedRole + '@metacrm.com';
+
+                // Add a small bounce animation to the input
+                emailInput.classList.add('animate-pulse');
+                setTimeout(() => emailInput.classList.remove('animate-pulse'), 500);
+            });
+        });
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Add loading state to button
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Signing In...';
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+
+            // Simulate slight delay for effect
+            setTimeout(() => {
+                if (selectedRole === 'ceo') {
+                    window.location.href = '../ceo_dashboard/code.html';
+                } else if (selectedRole === 'manager') {
+                    window.location.href = '../manager_dashboard/code.html';
+                } else if (selectedRole === 'employee') {
+                    window.location.href = '../employee_dashboard/code.html';
+                } else {
+                    window.location.href = '../global_dashboard/code.html';
+                }
+            }, 600);
+        });
+    </script>
+</body>
+
+</html>
