@@ -46,8 +46,8 @@ export default function LoginPage() {
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-primary-container rounded-2xl shadow-lg shadow-blue-200 mb-4 transform hover:scale-105 transition-transform duration-300">
-            <span className="material-symbols-outlined text-white text-2xl" data-icon="hub">hub</span>
+          <div className="inline-flex items-center justify-center w-20 h-20 mb-4 transform hover:scale-105 transition-transform duration-300">
+            <img src="/logo.png" alt="Penta CRM Logo" className="w-full h-full object-contain drop-shadow-xl" />
           </div>
           <h1 className="text-3xl font-bold text-blue-700 tracking-tight">Penta CRM</h1>
           <p className="text-[10px] text-slate-400 font-label-caps uppercase tracking-widest mt-1">Lead Management Platform</p>

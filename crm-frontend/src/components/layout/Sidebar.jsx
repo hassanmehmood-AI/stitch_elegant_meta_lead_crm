@@ -33,9 +33,12 @@ export default function Sidebar({ user }) {
 
   return (
     <aside className="fixed left-0 h-screen w-64 border-r border-blue-100/20 bg-slate-50/50 backdrop-blur-md shadow-[40px_0_60px_-15px_rgba(27,46,253,0.03)] flex flex-col py-6 px-4 z-50">
-      <div className="mb-10 px-2">
-        <h1 className="text-xl font-bold text-blue-700 tracking-tight">Penta CRM</h1>
-        <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-1">Lead Management</p>
+      <div className="mb-10 px-2 flex items-center gap-3">
+        <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
+        <div>
+          <h1 className="text-xl font-bold text-blue-700 tracking-tight leading-none">Penta CRM</h1>
+          <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-1">Lead Management</p>
+        </div>
       </div>
 
       <nav className="flex-1 space-y-1">
