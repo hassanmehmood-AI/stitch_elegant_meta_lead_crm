@@ -42,21 +42,6 @@ export default function LeadDetails({ lead }) {
         </div>
       </div>
 
-      {/* Tags */}
-      <div className="bg-white rounded-[16px] p-8 border border-blue-100/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)]">
-        <h3 className="font-bold text-[18px] text-on-surface mb-4">Tags</h3>
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span key={tag.label} className={`px-3 py-1.5 rounded-lg ${tag.bg} ${tag.text} text-xs font-bold border ${tag.border}`}>
-              {tag.label}
-            </span>
-          ))}
-          <button className="px-3 py-1.5 rounded-lg bg-slate-50 text-slate-500 text-xs font-bold border border-dashed border-slate-200 flex items-center gap-1">
-            <span className="material-symbols-outlined text-[14px]">add</span>
-            Add Tag
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
