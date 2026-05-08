@@ -353,16 +353,7 @@ export default function LeadDetailsPage() {
                 </div>
               </div>
 
-              {/* Contact Lead — employee only */}
-              {role === 'employee' && (
-                <button
-                  onClick={() => setShowContact(true)}
-                  className="flex items-center gap-2 bg-emerald-50 px-4 py-2.5 rounded-xl border border-emerald-200 shadow-sm text-sm font-bold text-emerald-700 hover:border-emerald-400 transition-all"
-                >
-                  <span className="material-symbols-outlined text-base">contact_phone</span>
-                  Contact Lead
-                </button>
-              )}
+
 
               {/* Schedule Meeting — hide for manager, show for employee/ceo */}
               {role !== 'manager' && (
@@ -375,57 +366,7 @@ export default function LeadDetailsPage() {
                 </button>
               )}
 
-              {/* Assign to Agent — employee + manager */}
-              {(role === 'manager' || role === 'employee') && (
-                <div ref={agentRef} className="relative">
-                  <button
-                    onClick={() => setShowAgentDropdown((v) => !v)}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border shadow-sm text-sm font-bold transition-all ${agentInfo
-                        ? 'bg-emerald-50 border-emerald-200 text-emerald-700 hover:border-emerald-400'
-                        : 'bg-white border-blue-100/50 text-on-surface-variant hover:border-blue-300'
-                      }`}
-                  >
-                    <span className="material-symbols-outlined text-base">person_add</span>
-                    {agentInfo ? agentInfo.name : 'Assign Agent'}
-                    <span className="material-symbols-outlined text-slate-400 text-lg">expand_more</span>
-                  </button>
-                  {showAgentDropdown && (
-                    <div className="absolute right-0 top-full mt-1 w-60 bg-white border border-blue-100/30 rounded-xl shadow-lg z-20 py-1">
-                      <div className="px-4 py-2 border-b border-slate-50">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Select Agent</p>
-                      </div>
-                      {assignedAgent && (
-                        <button
-                          onClick={() => handleAssignAgent(null)}
-                          className="w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors"
-                        >
-                          Remove Assignment
-                        </button>
-                      )}
-                      {AGENTS.map((agent) => (
-                        <button
-                          key={agent.initials}
-                          onClick={() => handleAssignAgent(agent.initials)}
-                          className={`w-full text-left px-4 py-3 text-sm transition-colors ${assignedAgent === agent.initials
-                              ? 'bg-emerald-50 text-emerald-700 font-semibold'
-                              : 'text-slate-700 hover:bg-slate-50'
-                            }`}
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-xs flex-shrink-0">
-                              {agent.initials}
-                            </div>
-                            <div>
-                              <p className="font-semibold leading-tight">{agent.name}</p>
-                              <p className="text-xs text-slate-400 leading-tight">{agent.role}</p>
-                            </div>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
+
 
               {/* Update Status */}
               {(role === 'manager' || role === 'employee') && (
@@ -483,14 +424,7 @@ export default function LeadDetailsPage() {
                 </div>
               )}
 
-              {/* Edit Lead */}
-              <button
-                onClick={() => setShowEditLead(true)}
-                className="bg-primary-container text-white px-6 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-all"
-              >
-                <span className="material-symbols-outlined text-base">edit</span>
-                Edit Lead
-              </button>
+
             </div>
           </div>
 
@@ -599,8 +533,6 @@ export default function LeadDetailsPage() {
                 }}
               />
             </div>
-          </div>
-
           {/* Submit bar — employee and manager */}
           {(role === 'employee' || role === 'manager') && (
             <div className="mt-10 flex items-center justify-between gap-4 p-6 bg-white rounded-2xl border border-blue-100/20 shadow-[0_4px_20px_-8px_rgba(27,46,253,0.06)]">

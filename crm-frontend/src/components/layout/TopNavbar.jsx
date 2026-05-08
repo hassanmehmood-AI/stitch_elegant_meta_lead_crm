@@ -22,15 +22,7 @@ export default function TopNavbar({ onAddLead, searchPlaceholder = 'Search leads
           <span className="material-symbols-outlined">help_outline</span>
         </button>
         <div className="h-6 w-px bg-blue-100/30 mx-2" />
-        {onAddLead && (
-          <button
-            onClick={onAddLead}
-            className="bg-primary-container text-white px-5 py-2 rounded-xl text-sm font-bold hover:opacity-90 transition-all flex items-center gap-2 shadow-lg shadow-blue-600/20"
-          >
-            <span className="material-symbols-outlined text-sm">add</span>
-            Add Lead
-          </button>
-        )}
+
       </div>
     </header>
   );
