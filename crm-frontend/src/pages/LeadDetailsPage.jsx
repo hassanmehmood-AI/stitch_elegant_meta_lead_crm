@@ -550,6 +550,7 @@ export default function LeadDetailsPage() {
             </div>
           )}
 
+          </div>
         </div>
       </main>
 
