@@ -499,35 +499,6 @@ export default function LeadDetailsPage() {
             {/* Left: Activity + Notes */}
             <div className="lg:col-span-8 space-y-gutter">
 
-              {/* Agent Assignment Banner */}
-              {(role === 'manager' || role === 'employee') && (
-                <div className={`rounded-2xl p-4 flex items-center gap-4 border ${agentInfo
-                    ? 'bg-emerald-50 border-emerald-100'
-                    : 'bg-amber-50 border-amber-100'
-                  }`}>
-                  <span className={`material-symbols-outlined ${agentInfo ? 'text-emerald-600' : 'text-amber-600'}`}>
-                    {agentInfo ? 'person_check' : 'person_search'}
-                  </span>
-                  <div className="flex-1">
-                    {agentInfo ? (
-                      <p className="text-sm font-semibold text-emerald-800">
-                        Assigned to <span className="font-bold">{agentInfo.name}</span>
-                        <span className="text-emerald-600 font-normal"> · {agentInfo.role}</span>
-                      </p>
-                    ) : (
-                      <p className="text-sm font-semibold text-amber-800">
-                        Not yet assigned to an agent — use "Assign Agent" above to assign.
-                      </p>
-                    )}
-                  </div>
-                  {agentInfo && (
-                    <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-sm">
-                      {agentInfo.initials}
-                    </div>
-                  )}
-                </div>
-              )}
-
               {/* Activity Timeline */}
               <div className="bg-white rounded-[16px] p-8 border border-blue-100/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)]">
                 <div className="flex items-center justify-between mb-8">
