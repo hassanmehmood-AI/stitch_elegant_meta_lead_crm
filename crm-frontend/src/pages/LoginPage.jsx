@@ -45,7 +45,7 @@ export default function LoginPage() {
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <div className="inline-flex items-center justify-center w-14 h-14 bg-primary-container rounded-2xl shadow-lg shadow-blue-200 mb-4 transform hover:scale-105 transition-transform duration-300">
             <span className="material-symbols-outlined text-white text-2xl" data-icon="hub">hub</span>
           </div>
@@ -54,12 +54,12 @@ export default function LoginPage() {
         </div>
 
         {/* Card */}
-        <div className="bg-white border border-blue-600/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] rounded-2xl p-8 transform transition-all duration-300 hover:shadow-[0_40px_100px_-20px_rgba(27,46,253,0.15)]">
+        <div className="bg-white border border-blue-600/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] rounded-2xl p-6 transform transition-all duration-300 hover:shadow-[0_40px_100px_-20px_rgba(27,46,253,0.15)]">
           <h2 className="text-[22px] font-bold text-on-surface mb-1">Welcome back</h2>
-          <p className="text-sm text-slate-500 mb-8">Sign in to your account to continue.</p>
+          <p className="text-sm text-slate-500 mb-6">Sign in to your account to continue.</p>
 
           {/* Demo role picker */}
-          <div className="mb-6">
+          <div className="mb-4">
             <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Select Role Demo</label>
             <div className="grid grid-cols-3 gap-2">
               {[
@@ -90,7 +90,7 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <div>
               <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Email</label>
               <div className="relative">
@@ -152,7 +152,7 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-xs text-slate-400 mt-6">
+        <p className="text-center text-xs text-slate-400 mt-4">
           © 2024 Penta CRM · All rights reserved
         </p>
       </div>
