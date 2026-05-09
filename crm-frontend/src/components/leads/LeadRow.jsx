@@ -74,7 +74,7 @@ function AgentDropdown({ leadId, current, onAssign }) {
   );
 }
 
-export default function LeadRow({ lead, onUpdate }) {
+export default function LeadRow({ lead, onUpdate, onViewDetail }) {
   const navigate = useNavigate();
   const role = useRole();
   const isRestricted = role === 'manager' || role === 'ceo';
@@ -140,12 +140,24 @@ export default function LeadRow({ lead, onUpdate }) {
         )}
       </td>
       <td className="px-6 py-5 text-right">
-        <button
-          onClick={(e) => e.stopPropagation()}
-          className="text-slate-300 group-hover:text-blue-600 transition-colors"
-        >
-          <span className="material-symbols-outlined">more_vert</span>
-        </button>
+        <div className="flex items-center justify-end gap-2">
+          <button
+            onClick={(e) => { e.stopPropagation(); onViewDetail?.(lead); }}
+            className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-50 text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition-all"
+            title="Quick View"
+          >
+            <span className="material-symbols-outlined text-xl">visibility</span>
+          </button>
+          {!isRestricted && (
+            <button
+              onClick={(e) => { e.stopPropagation(); navigate(`/leads/${lead.id}`); }}
+              className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-50 text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition-all"
+              title="Full Details"
+            >
+              <span className="material-symbols-outlined text-xl">open_in_new</span>
+            </button>
+          )}
+        </div>
       </td>
     </tr>
   );

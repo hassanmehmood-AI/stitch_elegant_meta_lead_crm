@@ -4,12 +4,8 @@ import TopNavbar from '../components/layout/TopNavbar';
 import LeadsTable from '../components/leads/LeadsTable';
 import AddLeadModal from '../components/leads/AddLeadModal';
 import FilterDropdown from '../components/shared/FilterDropdown';
+import LeadDetailsDrawer from '../components/shared/LeadDetailsDrawer';
 import { useRole } from '../hooks/useRole';
-
-
-
-// USER will be generated dynamically inside the component
-
 import { api } from '../services/api';
 
 const DATE_OPTIONS = ['Last 7 Days', 'Last 30 Days', 'Last 90 Days', 'All Time'];
@@ -33,6 +29,7 @@ export default function AllLeads() {
   const pageSize = 10;
   const [showDateDropdown, setShowDateDropdown] = useState(false);
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+  const [selectedLead, setSelectedLead] = useState(null);
   const dateRef = useRef(null);
   const statusRef = useRef(null);
 
@@ -209,14 +206,22 @@ export default function AllLeads() {
               No leads match the selected filters.
             </div>
           ) : (
-            <LeadsTable leads={filteredLeads} page={page} pageSize={pageSize} onPageChange={setPage} onUpdate={() => {
-              api.getLeads(searchQuery, statusFilter !== 'All Statuses' ? statusFilter : null, page, pageSize).then(setLeads);
-            }} />
+            <LeadsTable 
+              leads={filteredLeads} 
+              page={page} 
+              pageSize={pageSize} 
+              onPageChange={setPage} 
+              onViewDetail={(lead) => setSelectedLead(lead)}
+              onUpdate={() => {
+                api.getLeads(searchQuery, statusFilter !== 'All Statuses' ? statusFilter : null, page, pageSize).then(setLeads);
+              }} 
+            />
           )}
         </div>
       </main>
 
       {showAddLead && <AddLeadModal onClose={() => setShowAddLead(false)} onSubmit={handleAddLead} />}
+      <LeadDetailsDrawer lead={selectedLead} isOpen={!!selectedLead} onClose={() => setSelectedLead(null)} />
     </div>
   );
 }

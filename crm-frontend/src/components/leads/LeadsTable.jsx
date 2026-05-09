@@ -1,6 +1,6 @@
 import LeadRow from './LeadRow';
 
-export default function LeadsTable({ leads, onUpdate, page = 0, pageSize = 10, onPageChange }) {
+export default function LeadsTable({ leads, onUpdate, page = 0, pageSize = 10, onPageChange, onViewDetail }) {
   return (
     <div className="glass-card rounded-[16px] overflow-hidden">
       <div className="overflow-x-auto">
@@ -12,12 +12,12 @@ export default function LeadsTable({ leads, onUpdate, page = 0, pageSize = 10, o
               <th className="px-6 py-4 text-xs font-label-caps text-slate-500 uppercase tracking-wider">Status</th>
               <th className="px-6 py-4 text-xs font-label-caps text-slate-500 uppercase tracking-wider">Created Date</th>
               <th className="px-6 py-4 text-xs font-label-caps text-slate-500 uppercase tracking-wider">Assigned To</th>
-              <th className="px-6 py-4" />
+              <th className="px-6 py-4 text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-blue-100/10">
             {leads.map((lead) => (
-              <LeadRow key={lead.id} lead={lead} onUpdate={onUpdate} />
+              <LeadRow key={lead.id} lead={lead} onUpdate={onUpdate} onViewDetail={onViewDetail} />
             ))}
           </tbody>
         </table>
