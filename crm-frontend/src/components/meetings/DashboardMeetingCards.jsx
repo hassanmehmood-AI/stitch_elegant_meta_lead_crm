@@ -86,7 +86,7 @@ function DoneRow({ m }) {
   );
 }
 
-export default function DashboardMeetingCards({ meetings = [], onJoin, myId = '' }) {
+export default function DashboardMeetingCards({ meetings = [], onJoin, myId = '', hideDone = false, compact = false }) {
   const [leads, setLeads] = useState([]);
 
   useEffect(() => {
@@ -96,34 +96,39 @@ export default function DashboardMeetingCards({ meetings = [], onJoin, myId = ''
   const scheduled = meetings.filter((m) => !m.completedBy || !m.completedBy.includes(myId));
   const done      = meetings.filter((m) =>  m.completedBy &&  m.completedBy.includes(myId));
 
+  const scheduledCard = (
+    <div className="bg-white rounded-[24px] border border-blue-100/20 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)] overflow-hidden flex flex-col">
+      <div className={`flex items-center gap-2.5 border-b border-slate-50 ${compact ? 'px-4 py-3.5' : 'px-6 py-5'}`}>
+        <div className={`rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0 ${compact ? 'w-7 h-7' : 'w-8 h-8'}`}>
+          <span className={`material-symbols-outlined text-blue-600 ${compact ? 'text-sm' : 'text-base'}`}>calendar_clock</span>
+        </div>
+        <h3 className={`font-bold text-on-surface ${compact ? 'text-[14px]' : 'text-[16px]'}`}>Scheduled Meetings</h3>
+        <span className={`ml-auto px-2 py-0.5 text-xs font-bold rounded-full ${
+          scheduled.length > 0 ? 'bg-blue-50 text-blue-700' : 'bg-slate-50 text-slate-400'
+        }`}>
+          {scheduled.length}
+        </span>
+      </div>
+      <div className="flex-1 divide-y divide-slate-50/80 overflow-y-auto max-h-[420px]">
+        {scheduled.length === 0 ? (
+          <div className={`text-center px-6 ${compact ? 'py-10' : 'py-14'}`}>
+            <span className="material-symbols-outlined text-3xl text-slate-200 block mb-2">event_available</span>
+            <p className="text-sm text-slate-400">No scheduled meetings</p>
+            <p className="text-xs text-slate-300 mt-1">Agent-scheduled meetings appear here</p>
+          </div>
+        ) : (
+          scheduled.map((m) => <MeetingRow key={m.id} m={m} onJoin={onJoin} leads={leads} />)
+        )}
+      </div>
+    </div>
+  );
+
+  if (hideDone) return scheduledCard;
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-      {/* Scheduled Meetings */}
-      <div className="bg-white rounded-[24px] border border-blue-100/20 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)] overflow-hidden flex flex-col">
-        <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-50">
-          <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center">
-            <span className="material-symbols-outlined text-blue-600 text-base">calendar_clock</span>
-          </div>
-          <h3 className="font-bold text-[16px] text-on-surface">Scheduled Meetings</h3>
-          <span className={`ml-auto px-2.5 py-1 text-xs font-bold rounded-full ${
-            scheduled.length > 0 ? 'bg-blue-50 text-blue-700' : 'bg-slate-50 text-slate-400'
-          }`}>
-            {scheduled.length}
-          </span>
-        </div>
-        <div className="flex-1 divide-y divide-slate-50/80">
-          {scheduled.length === 0 ? (
-            <div className="py-14 text-center px-6">
-              <span className="material-symbols-outlined text-3xl text-slate-200 block mb-2">event_available</span>
-              <p className="text-sm text-slate-400">No scheduled meetings</p>
-              <p className="text-xs text-slate-300 mt-1">Agent-scheduled meetings appear here</p>
-            </div>
-          ) : (
-            scheduled.map((m) => <MeetingRow key={m.id} m={m} onJoin={onJoin} leads={leads} />)
-          )}
-        </div>
-      </div>
+      {scheduledCard}
 
       {/* Meeting Done */}
       <div className="bg-white rounded-[24px] border border-emerald-100/30 shadow-[0_4px_30px_-10px_rgba(27,46,253,0.05)] overflow-hidden flex flex-col">

@@ -2,23 +2,26 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../components/layout/Sidebar';
 import TopNavbar from '../components/layout/TopNavbar';
 import DashboardMeetingCards from '../components/meetings/DashboardMeetingCards';
+import StatusTag from '../components/shared/StatusTag';
 import { api } from '../services/api';
-
-
-
-// USER will be generated dynamically inside the component
 
 export default function ManagerDashboard() {
   const initials = localStorage.getItem('crm_initials') || 'AS';
   const name = localStorage.getItem('crm_name') || 'Alex Sterling';
   const USER = { name, role: 'Sales Manager', initials };
+
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [meetings, setMeetings] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const loadMeetings = () => api.getMeetings().then(setMeetings).catch(() => { });
+  const [unassignedLeads, setUnassignedLeads] = useState([]);
+
+  const loadMeetings = () => api.getMeetings().then(setMeetings).catch(() => {});
+
+  const loadUnassigned = () =>
+    api.getUnassignedLeads().then(setUnassignedLeads).catch(() => {});
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,10 +35,11 @@ export default function ManagerDashboard() {
 
   useEffect(() => {
     loadMeetings();
+    loadUnassigned();
   }, []);
 
   const handleJoin = async (id) => {
-    await api.updateMeetingStatus(id, 'done', 'AS');
+    await api.updateMeetingStatus(id, 'done', initials);
     loadMeetings();
   };
 
@@ -64,14 +68,10 @@ export default function ManagerDashboard() {
 
         <div className="p-8 max-w-[1440px] mx-auto">
 
-          <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <div className="flex items-center gap-3 mb-1">
-                <h2 className="font-bold text-[40px] text-on-surface leading-tight">
-                  Welcome, <span className="text-blue-600">{USER.name}</span>
-                </h2>
-              </div>
-            </div>
+          <div className="mb-10">
+            <h2 className="font-bold text-[40px] text-on-surface leading-tight">
+              Welcome, <span className="text-blue-600">{USER.name}</span>
+            </h2>
           </div>
 
           {/* Stats */}
@@ -96,10 +96,90 @@ export default function ManagerDashboard() {
             </div>
           )}
 
-          {/* Meetings */}
-          <div>
-            <h3 className="text-xl font-bold text-on-surface mb-4">Team Meetings</h3>
-            <DashboardMeetingCards meetings={meetings} onJoin={handleJoin} myId="AS" />
+          {/* New Leads table + Scheduled Meetings */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            {/* New Leads — employee-style table, 2/3 width */}
+            <div className="lg:col-span-2 bg-white rounded-[24px] border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.02)] overflow-hidden flex flex-col">
+              <div className="px-8 py-5 border-b border-slate-50 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-amber-600 text-base">fiber_new</span>
+                </div>
+                <h3 className="text-xl font-bold text-blue-950">New Leads</h3>
+                <span className={`ml-auto px-2.5 py-1 text-xs font-bold rounded-full ${
+                  unassignedLeads.length > 0 ? 'bg-amber-50 text-amber-700' : 'bg-slate-50 text-slate-400'
+                }`}>
+                  {unassignedLeads.length}
+                </span>
+              </div>
+
+              <div className="overflow-x-auto overflow-y-auto max-h-[420px]">
+                <table className="w-full text-left border-collapse">
+                  <thead className="sticky top-0 z-10">
+                    <tr className="bg-slate-50/80">
+                      <th className="px-6 py-3.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Lead</th>
+                      <th className="px-4 py-3.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Whatsapp</th>
+                      <th className="px-4 py-3.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Platform</th>
+                      <th className="px-4 py-3.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50">
+                    {unassignedLeads.length === 0 ? (
+                      <tr>
+                        <td colSpan="4" className="py-16 text-center">
+                          <span className="material-symbols-outlined text-4xl text-slate-200 block mb-3">inbox</span>
+                          <p className="text-sm text-slate-400">No new unassigned leads</p>
+                          <p className="text-xs text-slate-300 mt-1">New leads from Meta will appear here</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      unassignedLeads.map((lead) => (
+                        <tr key={lead.id} className="hover:bg-slate-50/50 transition-all group">
+                          {/* Lead */}
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-xs flex-shrink-0 group-hover:scale-105 transition-transform">
+                                {lead.initials || (lead.name ? lead.name.slice(0, 2).toUpperCase() : 'NA')}
+                              </div>
+                              <div className="min-w-0">
+                                <p className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors truncate max-w-[130px]">
+                                  {lead.name}
+                                </p>
+                                <p className="text-[10px] text-slate-400 mt-0.5 truncate max-w-[130px]">
+                                  {lead.company || lead.city || '—'}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          {/* WhatsApp */}
+                          <td className="px-4 py-4">
+                            <p className="text-xs font-semibold text-slate-600">{lead.whatsapp_number || '—'}</p>
+                          </td>
+                          {/* Platform */}
+                          <td className="px-4 py-4">
+                            <span className={`text-[10px] font-bold px-2 py-1 rounded-lg ${
+                              lead.platform === 'Facebook' ? 'bg-blue-50 text-blue-700' : 'bg-pink-50 text-pink-700'
+                            }`}>
+                              {lead.platform || lead.source || '—'}
+                            </span>
+                          </td>
+                          {/* Status */}
+                          <td className="px-4 py-4">
+                            <StatusTag status={lead.status} />
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Scheduled Meetings — compact, 1/3 width */}
+            <div className="lg:col-span-1">
+              <DashboardMeetingCards meetings={meetings} onJoin={handleJoin} myId={initials} hideDone compact />
+            </div>
+
           </div>
 
         </div>
