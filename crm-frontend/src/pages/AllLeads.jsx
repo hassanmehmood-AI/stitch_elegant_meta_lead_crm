@@ -156,15 +156,15 @@ export default function AllLeads() {
                   onClick={() => { setShowStatusDropdown((v) => !v); setShowDateDropdown(false); }} 
                 />
                 {showStatusDropdown && (
-                  <div className="absolute right-0 top-full mt-1 w-44 bg-white border border-blue-100/30 rounded-xl shadow-lg z-20 py-1">
+                  <div className="absolute right-0 top-full mt-1 w-44 bg-white border border-blue-100/30 rounded-xl shadow-lg z-20 py-1 max-h-64 overflow-y-auto">
                     {STATUS_OPTIONS.map((opt) => (
                       <button
                         key={opt}
                         onClick={() => { setStatusFilter(opt); setShowStatusDropdown(false); }}
-                        className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                        className={`w-full text-left px-4 py-1.5 text-[11px] transition-colors ${
                           statusFilter === opt
-                            ? 'text-blue-600 font-semibold bg-blue-50'
-                            : 'text-slate-700 hover:bg-slate-50'
+                            ? 'text-blue-600 font-bold bg-blue-50'
+                            : 'text-slate-600 hover:bg-slate-50'
                         }`}
                       >
                         {opt}

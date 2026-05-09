@@ -22,6 +22,30 @@ const FILTER_CONFIG = {
   },
 };
 
+const DATE_FILTERS = [
+  { key: 'all',   label: 'All Leads',  days: null },
+  { key: 'week',  label: 'Last Week',  days: 7    },
+  { key: 'month', label: 'Last Month', days: 30   },
+];
+
+function parseLeadDate(lead) {
+  const raw = lead.assigned_date || lead.createdDate || lead.created_date;
+  if (!raw) return null;
+  const d = new Date(raw);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function applyDateFilter(leads, key) {
+  const cfg = DATE_FILTERS.find((f) => f.key === key);
+  if (!cfg || cfg.days === null) return leads;
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - cfg.days);
+  return leads.filter((l) => {
+    const d = parseLeadDate(l);
+    return d && d >= cutoff;
+  });
+}
+
 export default function MyLeads() {
   const initials = localStorage.getItem('crm_initials') || 'MO';
   const name     = localStorage.getItem('crm_name')     || 'Agent';
@@ -38,6 +62,7 @@ export default function MyLeads() {
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [dateFilter, setDateFilter] = useState('all');
 
   const fetchLeads = async () => {
     setLoading(true);
@@ -56,9 +81,10 @@ export default function MyLeads() {
     fetchLeads();
   }, []);
 
-  const visibleLeads = activeFilter
+  const statusFiltered = activeFilter
     ? leads.filter((l) => activeFilter.statuses.includes(l.status))
     : leads;
+  const visibleLeads = applyDateFilter(statusFiltered, dateFilter);
 
   return (
     <div className="flex min-h-screen">
@@ -67,7 +93,7 @@ export default function MyLeads() {
         <TopNavbar searchPlaceholder="Search leads by name, phone or status..." role="employee" />
 
         <div className="max-w-[1440px] mx-auto p-container-padding">
-          <div className="flex items-end justify-between mb-8">
+          <div className="flex items-end justify-between mb-6">
             <div>
               <div className="flex items-center gap-3">
                 <h2 className="font-h2 text-[32px] text-on-surface">My Leads</h2>
@@ -94,6 +120,30 @@ export default function MyLeads() {
                 )}
               </div>
             </div>
+          </div>
+
+          {/* Date filter chips */}
+          <div className="flex items-center gap-2 mb-6">
+            <span className="material-symbols-outlined text-slate-400 text-base">calendar_month</span>
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1">Period:</span>
+            {DATE_FILTERS.map((f) => (
+              <button
+                key={f.key}
+                onClick={() => setDateFilter(f.key)}
+                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all border ${
+                  dateFilter === f.key
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+                    : 'bg-white text-slate-500 border-slate-200 hover:border-blue-300 hover:text-blue-600'
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+            {dateFilter !== 'all' && (
+              <span className="ml-2 px-2.5 py-0.5 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-full border border-blue-100">
+                {visibleLeads.length} result{visibleLeads.length !== 1 ? 's' : ''}
+              </span>
+            )}
           </div>
 
           {error ? (
@@ -189,8 +239,9 @@ export default function MyLeads() {
               <div className="px-8 py-4 bg-slate-50/50">
                 <p className="text-xs text-slate-500 font-medium">
                   Showing <span className="text-slate-800 font-bold">{visibleLeads.length}</span>
-                  {activeFilter ? ` ${activeFilter.label}` : ''} leads
-                  {activeFilter && <span className="text-slate-400"> (out of {leads.length} total)</span>}
+                  {activeFilter ? ` ${activeFilter.label}` : ''}
+                  {dateFilter !== 'all' ? ` · ${DATE_FILTERS.find(f => f.key === dateFilter)?.label}` : ''} leads
+                  {(activeFilter || dateFilter !== 'all') && <span className="text-slate-400"> (out of {leads.length} total)</span>}
                 </p>
               </div>
             </div>

@@ -344,14 +344,6 @@ export default function LeadDetailsPage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              {/* Source */}
-              <div className="flex flex-col gap-1 mr-4">
-                <span className="text-[10px] font-bold text-slate-400 uppercase">Lead Source</span>
-                <div className="flex items-center gap-2 text-on-surface font-semibold">
-                  <span className="material-symbols-outlined text-blue-600">language</span>
-                  {lead.source}
-                </div>
-              </div>
 
 
 
@@ -380,7 +372,7 @@ export default function LeadDetailsPage() {
                     <span className="material-symbols-outlined text-slate-400 text-lg">expand_more</span>
                   </button>
                   {showStatusDropdown && (
-                    <div className="absolute right-0 top-full mt-1 w-44 bg-white border border-blue-100/30 rounded-xl shadow-lg z-20 py-1">
+                    <div className="absolute right-0 top-full mt-1 w-44 bg-white border border-blue-100/30 rounded-xl shadow-lg z-20 py-1 max-h-64 overflow-y-auto">
                       {STATUS_OPTIONS_EMPLOYEE.map((opt) => (
                         <button
                           key={opt}
@@ -411,9 +403,9 @@ export default function LeadDetailsPage() {
                                setIsSaving(false);
                              }
                            }}
-                          className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${currentStatus === opt
-                              ? 'text-blue-600 font-semibold bg-blue-50'
-                              : 'text-slate-700 hover:bg-slate-50'
+                          className={`w-full text-left px-4 py-1.5 text-[11px] transition-colors ${currentStatus === opt
+                              ? 'text-blue-600 font-bold bg-blue-50'
+                              : 'text-slate-600 hover:bg-slate-50'
                             }`}
                         >
                           {opt}

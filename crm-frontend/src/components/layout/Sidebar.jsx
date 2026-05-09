@@ -59,22 +59,24 @@ export default function Sidebar({ user }) {
       </nav>
 
       <div className="mt-auto pt-6 border-t border-blue-100/20">
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-3 text-sm text-slate-500 hover:text-red-600 hover:bg-red-50/30 rounded-xl font-medium transition-all"
-        >
-          <span className="material-symbols-outlined">logout</span>
-          <span>Logout</span>
-        </button>
         {user && (
-          <div className="mt-4 flex items-center gap-3 px-4 py-2">
-            <div className="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-              {user.initials || user.name?.[0] || 'U'}
+          <div className="flex items-center justify-between px-4 py-2">
+            <div className="flex items-center gap-3 overflow-hidden">
+              <div className="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                {user.initials || user.name?.[0] || 'U'}
+              </div>
+              <div className="overflow-hidden">
+                <p className="text-xs font-bold truncate">{user.name}</p>
+                <p className="text-[10px] text-slate-400 truncate">{user.role}</p>
+              </div>
             </div>
-            <div className="overflow-hidden">
-              <p className="text-xs font-bold truncate">{user.name}</p>
-              <p className="text-[10px] text-slate-400 truncate">{user.role}</p>
-            </div>
+            <button
+              onClick={handleLogout}
+              className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+              title="Logout"
+            >
+              <span className="material-symbols-outlined text-lg">logout</span>
+            </button>
           </div>
         )}
       </div>

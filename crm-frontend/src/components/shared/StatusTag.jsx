@@ -1,24 +1,35 @@
 const STATUS_MAP = {
-  'New Lead':          { bg: 'bg-slate-100',      text: 'text-slate-600'   },
-  'CREATED':           { bg: 'bg-slate-100',      text: 'text-slate-600'   },
-  'Qualified':         { bg: 'bg-green-100',      text: 'text-green-700'   },
-  'Meeting Scheduled': { bg: 'bg-green-100',      text: 'text-green-700'   },
-  'Highly Interested': { bg: 'bg-green-100',      text: 'text-green-700'   },
-  'In Discussion':     { bg: 'bg-green-100',      text: 'text-green-700'   },
-  'Meeting Done':      { bg: 'bg-green-700',      text: 'text-white'       },
-  'Converted':         { bg: 'bg-green-700',      text: 'text-white'       },
-  'Strong Follow-up':  { bg: 'bg-green-100',      text: 'text-green-700'   },
-  'Not Qualified':     { bg: 'bg-red-700',        text: 'text-white'       },
-  'Not Interested':    { bg: 'bg-red-700',        text: 'text-white'       },
-  'Not Responding':    { bg: 'bg-red-700',        text: 'text-white'       },
-  'Lead Lost':         { bg: 'bg-red-900',        text: 'text-white'       },
-  'Busy call back':    { bg: 'bg-green-100',      text: 'text-green-700'   },
+  // Neutral / Starting
+  'New Lead':          { bg: 'bg-slate-50',       text: 'text-slate-500'   },
+  'CREATED':           { bg: 'bg-slate-50',       text: 'text-slate-500'   },
+  
+  // Positive / Interest
+  'Qualified':         { bg: 'bg-emerald-50',     text: 'text-emerald-600' },
+  'Highly Interested': { bg: 'bg-emerald-50',     text: 'text-emerald-600' },
+  
+  // Active / Discussion
+  'In Discussion':     { bg: 'bg-indigo-50',      text: 'text-indigo-600'  },
+  'Strong Follow-up':  { bg: 'bg-indigo-50',      text: 'text-indigo-600'  },
+  
+  // Attention / Follow-up
+  'Meeting Scheduled': { bg: 'bg-amber-50',       text: 'text-amber-600'   },
+  'Busy call back':    { bg: 'bg-amber-50',       text: 'text-amber-600'   },
+  
+  // Success / Milestones
+  'Meeting Done':      { bg: 'bg-blue-600',       text: 'text-white'       },
+  'Converted':         { bg: 'bg-blue-700',       text: 'text-white'       },
+  
+  // Negative / Lost
+  'Not Qualified':     { bg: 'bg-rose-50',        text: 'text-rose-500'    },
+  'Not Interested':    { bg: 'bg-rose-50',        text: 'text-rose-500'    },
+  'Not Responding':    { bg: 'bg-rose-50',        text: 'text-rose-500'    },
+  'Lead Lost':         { bg: 'bg-slate-200',      text: 'text-slate-600'   },
 };
 
 export default function StatusTag({ status }) {
-  const s = STATUS_MAP[status] ?? { bg: 'bg-slate-100', text: 'text-slate-600' };
+  const s = STATUS_MAP[status] ?? { bg: 'bg-slate-50', text: 'text-slate-500' };
   return (
-    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${s.bg} ${s.text}`}>
+    <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold tracking-tight ${s.bg} ${s.text} border border-black/5`}>
       {status}
     </span>
   );

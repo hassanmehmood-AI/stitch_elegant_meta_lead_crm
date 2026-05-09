@@ -27,45 +27,54 @@ function LeadDetailsDrawer({ lead, isOpen, onClose }) {
 
   const sections = [
     {
-      title: 'Contact Information',
-      icon: 'contact_page',
+      title: 'Contact & Identity',
+      icon: 'person',
       fields: [
+        { label: 'Lead ID', value: lead.id },
         { label: 'Full Name', value: lead.name },
         { label: 'WhatsApp', value: lead.whatsapp_number, isCopy: true },
         { label: 'Email', value: lead.email, isCopy: true },
         { label: 'City', value: lead.city },
         { label: 'Job Title', value: lead.job_title },
-        { label: 'Company', value: lead.company },
+        { label: 'Company Name', value: lead.company },
       ]
     },
     {
-      title: 'Campaign & Ads',
+      title: 'Campaign Details',
       icon: 'campaign',
       fields: [
+        { label: 'Created Time', value: lead.created_date || lead.created_at },
         { label: 'Platform', value: lead.platform },
-        { label: 'Campaign', value: lead.campaign_name },
+        { label: 'Campaign ID', value: lead.campaign_id },
+        { label: 'Campaign Name', value: lead.campaign_name },
+        { label: 'Ad Set ID', value: lead.adset_id },
+        { label: 'Ad Set Name', value: lead.adset_name },
+        { label: 'Ad ID', value: lead.ad_id },
         { label: 'Ad Name', value: lead.ad_name },
+        { label: 'Form ID', value: lead.form_id },
         { label: 'Form Name', value: lead.form_name },
-        { label: 'Inbox URL', value: lead.inbox_url, isLink: true },
+        { label: 'Organic', value: lead.is_organic ? 'Yes' : 'No' },
       ]
     },
     {
-      title: 'Business Insights',
-      icon: 'lightbulb',
+      title: 'BOC Questions & Investment',
+      icon: 'quiz',
       fields: [
-        { label: 'Investment Range', value: lead.investment_range },
-        { label: 'BOC Questions', value: lead.boc_questions },
+        { label: 'Capital Range (Investment)', value: lead.investment_range, isLong: true },
+        { label: 'BOC Business Model Questions', value: lead.boc_questions, isLong: true },
       ]
     },
     {
-      title: 'Assignment & Status',
+      title: 'Internal & Interaction',
       icon: 'assignment_ind',
       fields: [
         { label: 'Lead Status', value: lead.status },
+        { label: 'Agent Name', value: lead.assigned_agent || lead.assignedTo },
         { label: 'Assigned Date', value: lead.assigned_date },
-        { label: 'Next Follow-up', value: lead.next_follow_up },
         { label: 'Current Response', value: lead.current_response },
-        { label: 'Manager Notes', value: lead.manager_notes, isLong: true },
+        { label: 'Follow Up', value: lead.next_follow_up },
+        { label: 'Sales Manager Notes', value: lead.manager_notes, isLong: true },
+        { label: 'Inbox URL', value: lead.inbox_url, isLink: true },
       ]
     }
   ];
@@ -73,7 +82,7 @@ function LeadDetailsDrawer({ lead, isOpen, onClose }) {
   return (
     <div className={`fixed inset-0 z-[100] transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
       <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={onClose} />
-      <div className={`absolute right-0 top-0 bottom-0 w-[500px] bg-white shadow-2xl transition-transform duration-500 ease-out transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col`}>
+      <div className={`absolute right-0 top-0 bottom-0 w-[550px] bg-white shadow-2xl transition-transform duration-500 ease-out transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col`}>
         {/* Header */}
         <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0 z-10">
           <div className="flex items-center gap-4">
@@ -82,7 +91,7 @@ function LeadDetailsDrawer({ lead, isOpen, onClose }) {
             </div>
             <div>
               <h3 className="font-bold text-xl text-slate-900">{lead.name}</h3>
-              <p className="text-xs text-slate-400">Lead ID: #{lead.id}</p>
+              <p className="text-xs text-slate-400">Detailed Lead View</p>
             </div>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-slate-50 rounded-xl transition-colors">
@@ -99,13 +108,13 @@ function LeadDetailsDrawer({ lead, isOpen, onClose }) {
                 <h4 className="font-bold text-xs uppercase tracking-widest text-slate-400">{section.title}</h4>
               </div>
               <div className="grid grid-cols-2 gap-x-6 gap-y-5">
-                {section.fields.map((field) => (
-                  <div key={field.label} className={field.isLong ? 'col-span-2' : ''}>
+                {section.fields.map((field, fIdx) => (
+                  <div key={field.label + fIdx} className={field.isLong ? 'col-span-2' : ''}>
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-1">{field.label}</p>
                     <div className="flex items-center gap-2 group">
                       {field.isLink ? (
                         <a href={field.value} target="_blank" rel="noreferrer" className="text-sm font-semibold text-blue-600 hover:underline break-all">
-                          Open in Meta Inbox
+                          {field.value ? 'Open Inbox Link' : '—'}
                         </a>
                       ) : (
                         <p className={`text-sm font-semibold text-slate-800 ${field.isLong ? 'leading-relaxed' : ''}`}>
@@ -113,7 +122,10 @@ function LeadDetailsDrawer({ lead, isOpen, onClose }) {
                         </p>
                       )}
                       {field.isCopy && field.value && (
-                        <button className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-slate-100 rounded text-slate-400">
+                        <button 
+                          onClick={() => navigator.clipboard.writeText(field.value)}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-slate-100 rounded text-slate-400"
+                        >
                           <span className="material-symbols-outlined text-sm">content_copy</span>
                         </button>
                       )}
@@ -129,18 +141,21 @@ function LeadDetailsDrawer({ lead, isOpen, onClose }) {
   );
 }
 
-function EmployeeLeadsList({ leads, onLeadClick }) {
+function EmployeeLeadsList({ leads, onLeadClick, onViewDetail }) {
   const navigate = useNavigate();
 
   return (
     <div className="mt-12 bg-white rounded-[32px] border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.02)] overflow-hidden">
       <div className="px-8 py-6 border-b border-slate-50 flex items-center justify-between">
-        <h3 className="text-xl font-bold text-blue-950">My assigned leads</h3>
-        <button 
+        <div>
+          <h3 className="text-xl font-bold text-blue-950">New Entry Leads</h3>
+          <p className="text-[11px] text-slate-400 mt-0.5">Status updated leads move to My All Leads</p>
+        </div>
+        <button
           onClick={() => navigate('/leads/my')}
           className="text-[11px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-700 transition-colors flex items-center gap-1"
         >
-          View All
+          My All Leads
           <span className="material-symbols-outlined text-sm">arrow_forward</span>
         </button>
       </div>
@@ -162,15 +177,15 @@ function EmployeeLeadsList({ leads, onLeadClick }) {
               <tr>
                 <td colSpan="6" className="py-20 text-center">
                   <span className="material-symbols-outlined text-4xl text-slate-200 block mb-3">person_search</span>
-                  <p className="text-sm text-slate-400">No leads assigned yet</p>
+                  <p className="text-sm text-slate-400">No new entry leads</p>
+                  <p className="text-xs text-slate-300 mt-1">All leads have been actioned — check My All Leads</p>
                 </td>
               </tr>
             ) : (
               leads.map((lead) => (
                 <tr
                   key={lead.id}
-                  onClick={() => onLeadClick(lead)}
-                  className="hover:bg-slate-50/50 transition-all cursor-pointer group"
+                  className="hover:bg-slate-50/50 transition-all group"
                 >
                   <td className="px-8 py-5">
                     <div className="flex items-center gap-3">
@@ -205,9 +220,22 @@ function EmployeeLeadsList({ leads, onLeadClick }) {
                     <StatusTag status={lead.status} />
                   </td>
                   <td className="px-8 py-5 text-right">
-                    <button className="text-slate-300 hover:text-slate-600 transition-colors">
-                      <span className="material-symbols-outlined text-xl">more_vert</span>
-                    </button>
+                    <div className="flex items-center justify-end gap-2">
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); onViewDetail(lead); }}
+                        className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-50 text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition-all"
+                        title="Quick View Details"
+                      >
+                        <span className="material-symbols-outlined text-xl">visibility</span>
+                      </button>
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); onLeadClick(lead); }}
+                        className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-50 text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition-all" 
+                        title="Open Full Details"
+                      >
+                        <span className="material-symbols-outlined text-xl">open_in_new</span>
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
@@ -297,10 +325,11 @@ export default function EmployeeDashboard() {
                 />
               </div>
 
-              {/* Leads List */}
-              <EmployeeLeadsList 
-                leads={leads} 
-                onLeadClick={(lead) => setSelectedLead(lead)} 
+              {/* Leads List — only new entry leads (New Lead / CREATED) shown here */}
+               <EmployeeLeadsList
+                leads={leads.filter((l) => ['CREATED', 'New Lead'].includes(l.status))}
+                onLeadClick={(lead) => navigate(`/leads/${lead.id}`)}
+                onViewDetail={(lead) => setSelectedLead(lead)}
               />
             </>
           )}
