@@ -54,7 +54,6 @@ export default function CeoDashboard() {
             <h2 className="font-h2 text-[40px] font-bold text-on-surface leading-tight">
               Welcome, <span className="text-blue-600">{USER.name}</span>
             </h2>
-            <p className="text-slate-500 mt-1">Real-time performance metrics and cross-departmental analytics for Q3.</p>
           </div>
 
           {error ? (

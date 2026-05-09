@@ -71,7 +71,6 @@ export default function ManagerDashboard() {
                   Welcome, <span className="text-blue-600">{USER.name}</span>
                 </h2>
               </div>
-              <p className="text-slate-500">Overview of incoming leads from Meta campaigns.</p>
             </div>
           </div>
 

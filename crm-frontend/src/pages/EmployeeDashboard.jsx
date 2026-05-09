@@ -149,7 +149,6 @@ function EmployeeLeadsList({ leads, onLeadClick, onViewDetail }) {
       <div className="px-8 py-6 border-b border-slate-50 flex items-center justify-between">
         <div>
           <h3 className="text-xl font-bold text-blue-950">New Entry Leads</h3>
-          <p className="text-[11px] text-slate-400 mt-0.5">Status updated leads move to My All Leads</p>
         </div>
         <button
           onClick={() => navigate('/leads/my')}
@@ -298,7 +297,6 @@ export default function EmployeeDashboard() {
                 <h2 className="text-3xl font-bold text-blue-950 tracking-tight">
                   Welcome, <span className="text-blue-600">{USER.name}</span>
                 </h2>
-                <p className="text-slate-500 text-sm mt-1">Here is what is happening with your leads today.</p>
               </div>
 
               {/* Stats Bar */}
