@@ -3,6 +3,7 @@ import Sidebar from '../components/layout/Sidebar';
 import TopNavbar from '../components/layout/TopNavbar';
 import DashboardMeetingCards from '../components/meetings/DashboardMeetingCards';
 import StatusTag from '../components/shared/StatusTag';
+import AddEmployeeModal from '../components/agents/AddEmployeeModal';
 import { api } from '../services/api';
 
 export default function ManagerDashboard() {
@@ -15,6 +16,7 @@ export default function ManagerDashboard() {
   const [error, setError] = useState(null);
   const [meetings, setMeetings] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showAddEmployee, setShowAddEmployee] = useState(false);
 
   const [unassignedLeads, setUnassignedLeads] = useState([]);
 
@@ -39,19 +41,46 @@ export default function ManagerDashboard() {
   }, []);
 
   const handleJoin = async (id) => {
-    await api.updateMeetingStatus(id, 'done', initials);
-    loadMeetings();
+    try {
+      await api.updateMeetingStatus(id, 'done', initials);
+      loadMeetings();
+
+      // Find the meeting to identify the lead
+      const meeting = meetings.find((m) => m.id === id);
+      if (meeting) {
+        const leadName = meeting.lead || meeting.lead_name;
+        if (leadName) {
+          // Find the lead to update its status
+          let lead = leads.find((l) => l.name === leadName);
+          if (!lead) {
+            const matches = await api.getLeads(leadName);
+            lead = matches.find((l) => l.name === leadName);
+          }
+
+          if (lead) {
+            await api.updateLead(lead.id, { status: 'Meeting Done' });
+            // Refresh leads to update the dashboard stats
+            const updatedLeads = await api.getMetaLeads(searchQuery);
+            setLeads(updatedLeads);
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Failed to sync meeting completion with lead status:', err);
+    }
   };
 
   const total = leads.length;
   const unassigned = leads.filter((l) => !l.assignedAgent).length;
   const assigned = leads.filter((l) => l.assignedAgent).length;
+  const meetingDone = leads.filter((l) => l.status === 'Meeting Done').length;
   const closedWon = leads.filter((l) => l.status === 'Closed Won').length;
 
   const STATS = [
     { label: 'Meta Leads', value: total, icon: 'campaign', iconBg: 'bg-blue-50', iconColor: 'text-blue-600', valueColor: 'text-blue-700', border: 'border-blue-100/50' },
     { label: 'Unassigned', value: unassigned, icon: 'person_search', iconBg: 'bg-amber-50', iconColor: 'text-amber-600', valueColor: 'text-amber-700', border: 'border-amber-100/50' },
     { label: 'Assigned', value: assigned, icon: 'person_check', iconBg: 'bg-emerald-50', iconColor: 'text-emerald-600', valueColor: 'text-emerald-700', border: 'border-emerald-100/50' },
+    { label: 'Meeting Done', value: meetingDone, icon: 'task_alt', iconBg: 'bg-cyan-50', iconColor: 'text-cyan-600', valueColor: 'text-cyan-700', border: 'border-cyan-100/50' },
     { label: 'Closed Won', value: closedWon, icon: 'emoji_events', iconBg: 'bg-purple-50', iconColor: 'text-purple-600', valueColor: 'text-purple-700', border: 'border-purple-100/50' },
   ];
 
@@ -68,10 +97,17 @@ export default function ManagerDashboard() {
 
         <div className="p-8 max-w-[1440px] mx-auto">
 
-          <div className="mb-10">
+          <div className="mb-10 flex items-center justify-between">
             <h2 className="font-bold text-[40px] text-on-surface leading-tight">
               Welcome, <span className="text-blue-600">{USER.name}</span>
             </h2>
+            <button
+              onClick={() => setShowAddEmployee(true)}
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all shadow-lg shadow-blue-100"
+            >
+              <span className="material-symbols-outlined text-lg">person_add</span>
+              Add Employee
+            </button>
           </div>
 
           {/* Stats */}
@@ -83,7 +119,7 @@ export default function ManagerDashboard() {
           ) : error ? (
             <div className="py-20 text-center text-red-500">Error: {error}</div>
           ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
               {STATS.map((s) => (
                 <div key={s.label} className={`bg-white rounded-2xl p-6 border ${s.border} shadow-[0_4px_30px_-10px_rgba(27,46,253,0.06)]`}>
                   <div className={`inline-flex p-2.5 rounded-xl ${s.iconBg} mb-4`}>
@@ -184,6 +220,15 @@ export default function ManagerDashboard() {
 
         </div>
       </main>
+
+      {showAddEmployee && (
+        <AddEmployeeModal 
+          onClose={() => setShowAddEmployee(false)} 
+          onSuccess={() => {
+            // Refresh dashboard data if needed, though agent creation doesn't impact leads immediately
+          }}
+        />
+      )}
     </div>
   );
 }

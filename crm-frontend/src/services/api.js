@@ -3,7 +3,11 @@
 import axios from "axios";
 
 // Axios instance — all requests go to the backend
-const http = axios.create({ baseURL: "https://stitchelegantmetaleadcrm-production.up.railway.app/api" });
+const baseURL = window.location.hostname === "localhost" 
+  ? "http://localhost:4000/api" 
+  : "https://stitchelegantmetaleadcrm-production.up.railway.app/api";
+
+const http = axios.create({ baseURL });
 
 // Attach JWT token to every request (ready for Phase 9)
 http.interceptors.request.use((cfg) => {
@@ -460,5 +464,10 @@ export const api = {
   login: async (email, password) => {
     const { data } = await http.post("/auth/login", { email, password });
     return data; // { token, role, name, initials }
+  },
+
+  addAgent: async (agentData) => {
+    const { data } = await http.post("/agents", agentData);
+    return data;
   },
 };

@@ -1,6 +1,6 @@
 import LeadRow from './LeadRow';
 
-export default function LeadsTable({ leads, onUpdate, page = 0, pageSize = 10, onPageChange, onViewDetail }) {
+export default function LeadsTable({ leads, agents, onUpdate, page = 0, pageSize = 10, onPageChange, onViewDetail }) {
   return (
     <div className="glass-card rounded-[16px] overflow-hidden">
       <div className="overflow-x-auto">
@@ -17,7 +17,7 @@ export default function LeadsTable({ leads, onUpdate, page = 0, pageSize = 10, o
           </thead>
           <tbody className="divide-y divide-blue-100/10">
             {leads.map((lead) => (
-              <LeadRow key={lead.id} lead={lead} onUpdate={onUpdate} onViewDetail={onViewDetail} />
+              <LeadRow key={lead.id} lead={lead} agents={agents} onUpdate={onUpdate} onViewDetail={onViewDetail} />
             ))}
           </tbody>
         </table>

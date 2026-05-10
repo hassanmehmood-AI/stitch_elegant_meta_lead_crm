@@ -20,6 +20,7 @@ export default function AllLeads() {
 
   const [showAddLead, setShowAddLead] = useState(false);
   const [leads, setLeads] = useState([]);
+  const [agents, setAgents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [dateFilter, setDateFilter] = useState('Last 30 Days');
@@ -36,6 +37,11 @@ export default function AllLeads() {
   useEffect(() => {
     setPage(0);
   }, [searchQuery, statusFilter]);
+
+  useEffect(() => {
+    // Fetch agents once
+    api.getAgents().then(setAgents).catch(console.error);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(async () => {
@@ -208,6 +214,7 @@ export default function AllLeads() {
           ) : (
             <LeadsTable 
               leads={filteredLeads} 
+              agents={agents}
               page={page} 
               pageSize={pageSize} 
               onPageChange={setPage} 

@@ -5,7 +5,7 @@ import TopNavbar from '../components/layout/TopNavbar';
 import StatusTag from '../components/shared/StatusTag';
 import AddLeadModal from '../components/leads/AddLeadModal';
 import { useRole } from '../hooks/useRole';
-import { api, AGENTS } from '../services/api';
+import { api } from '../services/api';
 
 const USER_BY_ROLE = {
   ceo:      { name: 'Marcus Sterling', role: 'Chief Executive Officer', initials: 'MS' },
@@ -14,12 +14,11 @@ const USER_BY_ROLE = {
 };
 
 
-const AGENT_MAP = Object.fromEntries(AGENTS.map((a) => [a.initials, a]));
-
 /* ─── Employee: assigned leads tracking view ─── */
 function EmployeeAssignView() {
   const navigate = useNavigate();
   const [leads,   setLeads]   = useState([]);
+  const [agents,  setAgents]  = useState([]);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState(null);
 
@@ -27,8 +26,12 @@ function EmployeeAssignView() {
     setLoading(true);
     setError(null);
     try {
-      const data = await api.getAssignedLeadsOverview('AR');
-      setLeads(data);
+      const [leadsData, agentsData] = await Promise.all([
+        api.getAssignedLeadsOverview('AR'),
+        api.getAgents()
+      ]);
+      setLeads(leadsData);
+      setAgents(agentsData);
     } catch (err) {
       setError(err.message || 'Failed to load assigned leads.');
     } finally {
@@ -39,7 +42,7 @@ function EmployeeAssignView() {
   useEffect(() => { loadLeads(); }, []);
 
   // Group by assigned agent
-  const grouped = AGENTS.reduce((acc, agent) => {
+  const grouped = agents.reduce((acc, agent) => {
     const agentLeads = leads.filter((l) => l.assignedAgent === agent.initials);
     if (agentLeads.length > 0) acc[agent.initials] = { agent, leads: agentLeads };
     return acc;
@@ -160,6 +163,7 @@ function EmployeeAssignView() {
 function ManagerAssignView() {
   const [showAddLead, setShowAddLead] = useState(false);
   const [leads,    setLeads]    = useState([]);
+  const [agents,   setAgents]   = useState([]);
   const [loading,  setLoading]  = useState(true);
   const [error,    setError]    = useState(null);
   const [selected, setSelected] = useState([]);
@@ -170,9 +174,16 @@ function ManagerAssignView() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    api.getUnassignedLeads()
-      .then((data) => { setLeads(data); setLoading(false); })
-      .catch((err) => { setError(err.message || 'Failed to load unassigned leads.'); setLoading(false); });
+    Promise.all([
+      api.getUnassignedLeads(),
+      api.getAgents()
+    ])
+      .then(([leadsData, agentsData]) => { 
+        setLeads(leadsData); 
+        setAgents(agentsData);
+        setLoading(false); 
+      })
+      .catch((err) => { setError(err.message || 'Failed to load data.'); setLoading(false); });
   }, []);
 
   const toggleSelect = (id) =>
@@ -291,7 +302,7 @@ function ManagerAssignView() {
                 <p className="text-xs text-slate-400 mt-0.5">Select an agent to assign the selected leads</p>
               </div>
               <div className="divide-y divide-slate-50">
-                {AGENTS.map((agent) => (
+                {agents.map((agent) => (
                   <div
                     key={agent.name}
                     onClick={() => setAssignedAgent(agent.initials)}

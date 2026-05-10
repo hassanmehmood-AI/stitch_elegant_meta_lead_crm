@@ -2,14 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StatusTag from '../shared/StatusTag';
 import { useRole } from '../../hooks/useRole';
-import { api, AGENTS } from '../../services/api';
+import { api } from '../../services/api';
 
-const AGENT_MAP = Object.fromEntries(AGENTS.map((a) => [a.initials, a]));
-
-function AgentDropdown({ leadId, current, onAssign }) {
+function AgentDropdown({ leadId, current, agents = [], onAssign }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
-  const agentInfo = current ? AGENT_MAP[current] : null;
+  
+  const agentMap = Object.fromEntries(agents.map((a) => [a.initials, a]));
+  const agentInfo = current ? agentMap[current] : null;
 
   useEffect(() => {
     const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
@@ -47,7 +47,7 @@ function AgentDropdown({ leadId, current, onAssign }) {
               Remove Assignment
             </button>
           )}
-          {AGENTS.map((agent) => (
+          {agents.map((agent) => (
             <button
               key={agent.initials}
               onClick={() => { onAssign(leadId, agent.initials); setOpen(false); }}
@@ -74,7 +74,7 @@ function AgentDropdown({ leadId, current, onAssign }) {
   );
 }
 
-export default function LeadRow({ lead, onUpdate, onViewDetail }) {
+export default function LeadRow({ lead, agents, onUpdate, onViewDetail }) {
   const navigate = useNavigate();
   const role = useRole();
   const isRestricted = role === 'manager' || role === 'ceo';
@@ -115,6 +115,7 @@ export default function LeadRow({ lead, onUpdate, onViewDetail }) {
           <AgentDropdown 
             leadId={lead.id} 
             current={lead.assignedTo || lead.assignedAgent} 
+            agents={agents}
             onAssign={handleAssign} 
           />
         ) : role === 'ceo' ? (
