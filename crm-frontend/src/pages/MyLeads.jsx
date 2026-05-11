@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Sidebar from '../components/layout/Sidebar';
 import TopNavbar from '../components/layout/TopNavbar';
@@ -36,13 +36,24 @@ function parseLeadDate(lead) {
 }
 
 function applyDateFilter(leads, key) {
+  if (key === 'all') return leads;
+
   const cfg = DATE_FILTERS.find((f) => f.key === key);
-  if (!cfg || cfg.days === null) return leads;
-  const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - cfg.days);
+  if (cfg && cfg.days !== null) {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - cfg.days);
+    return leads.filter((l) => {
+      const d = parseLeadDate(l);
+      return d && d >= cutoff;
+    });
+  }
+
+  // Exact date match (Custom calendar selection)
   return leads.filter((l) => {
     const d = parseLeadDate(l);
-    return d && d >= cutoff;
+    if (!d) return false;
+    const formatted = d.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+    return formatted === key;
   });
 }
 
@@ -63,6 +74,8 @@ export default function MyLeads() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [dateFilter, setDateFilter] = useState('all');
+  const dateInputRef = useRef(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchLeads = async () => {
     setLoading(true);
@@ -84,13 +97,30 @@ export default function MyLeads() {
   const statusFiltered = activeFilter
     ? leads.filter((l) => activeFilter.statuses.includes(l.status))
     : leads;
-  const visibleLeads = applyDateFilter(statusFiltered, dateFilter);
+  const dateFiltered = applyDateFilter(statusFiltered, dateFilter);
+  
+  const visibleLeads = searchQuery
+    ? dateFiltered.filter(l => {
+        const q = searchQuery.toLowerCase();
+        return l.name?.toLowerCase().includes(q) || 
+               l.company?.toLowerCase().includes(q) || 
+               l.whatsapp_number?.toLowerCase().includes(q) ||
+               l.status?.toLowerCase().includes(q) ||
+               l.platform?.toLowerCase().includes(q) ||
+               l.source?.toLowerCase().includes(q);
+      })
+    : dateFiltered;
 
   return (
     <div className="flex min-h-screen">
       <Sidebar user={USER} />
       <main className="flex-1 ml-64 min-h-screen">
-        <TopNavbar searchPlaceholder="Search leads by name, phone or status..." role="employee" />
+        <TopNavbar 
+          searchPlaceholder="Search leads by name, phone or status..." 
+          role="employee" 
+          searchQuery={searchQuery}
+          onSearch={setSearchQuery}
+        />
 
         <div className="max-w-[1440px] mx-auto p-container-padding">
           <div className="flex items-end justify-between mb-6">
@@ -139,6 +169,34 @@ export default function MyLeads() {
                 {f.label}
               </button>
             ))}
+
+            {/* Custom date filter */}
+            <div className="relative ml-1 border-l border-slate-200 pl-3">
+              <button
+                onClick={() => dateInputRef.current?.showPicker()}
+                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-2 border ${
+                  !DATE_FILTERS.some(f => f.key === dateFilter)
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+                    : 'bg-white text-slate-500 border-slate-200 hover:border-blue-300 hover:text-blue-600'
+                }`}
+              >
+                <span className="material-symbols-outlined text-sm">filter_alt</span>
+                {!DATE_FILTERS.some(f => f.key === dateFilter) ? dateFilter : 'Filter'}
+              </button>
+              <input
+                ref={dateInputRef}
+                type="date"
+                className="absolute top-full left-0 opacity-0 pointer-events-none w-0 h-0"
+                onChange={(e) => {
+                  if (e.target.value) {
+                    const d = new Date(e.target.value);
+                    const formatted = d.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+                    setDateFilter(formatted);
+                  }
+                }}
+              />
+            </div>
+
             {dateFilter !== 'all' && (
               <span className="ml-2 px-2.5 py-0.5 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-full border border-blue-100">
                 {visibleLeads.length} result{visibleLeads.length !== 1 ? 's' : ''}
@@ -180,8 +238,7 @@ export default function MyLeads() {
               {visibleLeads.map((lead) => (
                 <div
                   key={lead.id}
-                  onClick={() => navigate(`/leads/${lead.id}`)}
-                  className="grid grid-cols-[1fr_160px_60px_180px_110px] px-8 py-5 border-b border-blue-50/50 hover:bg-blue-50/10 transition-colors cursor-pointer group"
+                  className="grid grid-cols-[1fr_160px_60px_180px_110px] px-8 py-5 border-b border-blue-50/50 hover:bg-blue-50/10 transition-colors group"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0">
@@ -240,7 +297,7 @@ export default function MyLeads() {
                 <p className="text-xs text-slate-500 font-medium">
                   Showing <span className="text-slate-800 font-bold">{visibleLeads.length}</span>
                   {activeFilter ? ` ${activeFilter.label}` : ''}
-                  {dateFilter !== 'all' ? ` · ${DATE_FILTERS.find(f => f.key === dateFilter)?.label}` : ''} leads
+                  {dateFilter !== 'all' ? ` · ${DATE_FILTERS.find(f => f.key === dateFilter)?.label || dateFilter}` : ''} leads
                   {(activeFilter || dateFilter !== 'all') && <span className="text-slate-400"> (out of {leads.length} total)</span>}
                 </p>
               </div>

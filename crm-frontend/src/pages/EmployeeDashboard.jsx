@@ -27,6 +27,19 @@ function StatCard({ label, value, subValue, subLabel, subColor = "text-emerald-5
 
 function EmployeeLeadsList({ leads, onLeadClick, onViewDetail }) {
   const navigate = useNavigate();
+  const [dateFilter, setDateFilter] = useState('');
+
+  // Apply date filter if one is selected
+  const visibleLeads = dateFilter
+    ? leads.filter((lead) => {
+        const raw = lead.createdDate || lead.assigned_date || lead.created_date;
+        if (!raw) return false;
+        const d = new Date(raw);
+        if (isNaN(d.getTime())) return false;
+        const formatted = d.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+        return formatted === dateFilter;
+      })
+    : leads;
 
   return (
     <div className="mt-12 bg-white rounded-[32px] border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.02)] overflow-hidden">
@@ -34,14 +47,53 @@ function EmployeeLeadsList({ leads, onLeadClick, onViewDetail }) {
         <div>
           <h3 className="text-xl font-bold text-blue-950">New Entry Leads</h3>
         </div>
-        <button
-          onClick={() => navigate('/leads/my')}
-          className="text-[11px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-700 transition-colors flex items-center gap-1"
-        >
-          My All Leads
-          <span className="material-symbols-outlined text-sm">arrow_forward</span>
-        </button>
+        <div className="flex items-center gap-3">
+          {/* Calendar filter button */}
+          <div className="relative">
+            <input
+              type="date"
+              className="absolute inset-0 opacity-0 cursor-pointer z-10"
+              onChange={(e) => {
+                if (e.target.value) {
+                  const d = new Date(e.target.value);
+                  const formatted = d.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+                  setDateFilter(formatted);
+                }
+              }}
+            />
+            <button
+              className={`px-4 py-1.5 rounded-full text-[11px] font-bold flex items-center gap-1.5 border pointer-events-none transition-all ${
+                dateFilter
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+                  : 'bg-white text-slate-500 border-slate-200 hover:border-blue-300'
+              }`}
+            >
+              <span className="material-symbols-outlined text-sm">calendar_today</span>
+              {dateFilter || 'Filter by Date'}
+            </button>
+          </div>
+
+          {/* Clear filter button */}
+          {dateFilter && (
+            <button
+              onClick={() => setDateFilter('')}
+              className="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500 transition-all"
+              title="Clear date filter"
+            >
+              <span className="material-symbols-outlined text-sm">close</span>
+            </button>
+          )}
+
+          <button
+            onClick={() => navigate('/leads/my')}
+            className="text-[11px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-700 transition-colors flex items-center gap-1"
+          >
+            My All Leads
+            <span className="material-symbols-outlined text-sm">arrow_forward</span>
+          </button>
+        </div>
       </div>
+
 
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
@@ -56,16 +108,20 @@ function EmployeeLeadsList({ leads, onLeadClick, onViewDetail }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-50">
-            {leads.length === 0 ? (
+            {visibleLeads.length === 0 ? (
               <tr>
                 <td colSpan="6" className="py-20 text-center">
                   <span className="material-symbols-outlined text-4xl text-slate-200 block mb-3">person_search</span>
-                  <p className="text-sm text-slate-400">No new entry leads</p>
-                  <p className="text-xs text-slate-300 mt-1">All leads have been actioned — check My All Leads</p>
+                  <p className="text-sm text-slate-400">
+                    {dateFilter ? `No leads found for ${dateFilter}` : 'No new entry leads'}
+                  </p>
+                  <p className="text-xs text-slate-300 mt-1">
+                    {dateFilter ? 'Try a different date or clear the filter.' : 'All leads have been actioned — check My All Leads'}
+                  </p>
                 </td>
               </tr>
             ) : (
-              leads.map((lead) => (
+              visibleLeads.map((lead) => (
                 <tr
                   key={lead.id}
                   className="hover:bg-slate-50/50 transition-all group"
@@ -140,6 +196,7 @@ export default function EmployeeDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedLead, setSelectedLead] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -163,7 +220,12 @@ export default function EmployeeDashboard() {
     <div className="flex min-h-screen bg-slate-50/50">
       <Sidebar user={USER} />
       <main className="flex-1 ml-64 min-h-screen">
-        <TopNavbar searchPlaceholder="Search my leads..." role="employee" />
+        <TopNavbar 
+          searchPlaceholder="Search my leads..." 
+          role="employee" 
+          searchQuery={searchQuery}
+          onSearch={setSearchQuery}
+        />
 
         <div className="p-10 max-w-[1400px] mx-auto">
           {loading ? (
@@ -208,7 +270,19 @@ export default function EmployeeDashboard() {
 
               {/* Leads List — only new entry leads (New Lead / CREATED) shown here */}
               <EmployeeLeadsList
-                leads={leads.filter((l) => ['CREATED', 'New Lead'].includes(l.status))}
+                leads={
+                  searchQuery 
+                    ? leads.filter((l) => ['CREATED', 'New Lead'].includes(l.status)).filter(l => {
+                        const q = searchQuery.toLowerCase();
+                        return l.name?.toLowerCase().includes(q) || 
+                               l.company?.toLowerCase().includes(q) || 
+                               l.whatsapp_number?.toLowerCase().includes(q) ||
+                               l.status?.toLowerCase().includes(q) ||
+                               l.platform?.toLowerCase().includes(q) ||
+                               l.source?.toLowerCase().includes(q);
+                      })
+                    : leads.filter((l) => ['CREATED', 'New Lead'].includes(l.status))
+                }
                 onLeadClick={(lead) => navigate(`/leads/${lead.id}`)}
                 onViewDetail={(lead) => setSelectedLead(lead)}
               />
