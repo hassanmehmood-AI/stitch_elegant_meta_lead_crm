@@ -6,7 +6,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [role, setRole] = useState('ceo');
   const [form, setForm] = useState({ email: 'ceo@pentacrm.com', password: 'password', remember: true });
-   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
 
@@ -24,12 +24,12 @@ export default function LoginPage() {
     try {
       setError(null);
       const result = await api.login(form.email, form.password);
-      localStorage.setItem('crm_role',     result.role);
-      localStorage.setItem('crm_token',    result.token);
+      localStorage.setItem('crm_role', result.role);
+      localStorage.setItem('crm_token', result.token);
       localStorage.setItem('crm_initials', result.initials);
-      localStorage.setItem('crm_name',     result.name);
-      if (result.role === 'ceo')      navigate('/dashboard/ceo');
-      if (result.role === 'manager')  navigate('/dashboard/manager');
+      localStorage.setItem('crm_name', result.name);
+      if (result.role === 'ceo') navigate('/dashboard/ceo');
+      if (result.role === 'manager') navigate('/dashboard/manager');
       if (result.role === 'employee') navigate('/dashboard/employee');
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid email or password');
@@ -45,12 +45,12 @@ export default function LoginPage() {
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-20 h-20 mb-4 transform hover:scale-105 transition-transform duration-300">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-24 h-24 mb-4 transform hover:scale-105 transition-transform duration-300">
             <img src="/logo.png" alt="Penta CRM Logo" className="w-full h-full object-contain drop-shadow-xl" />
           </div>
-          <h1 className="text-3xl font-bold text-blue-700 tracking-tight">Penta CRM</h1>
-          <p className="text-[10px] text-slate-400 font-label-caps uppercase tracking-widest mt-1">Lead Management Platform</p>
+          <h1 className="text-3xl font-bold text-blue-700 tracking-[0.06em]">Penta CRM</h1>
+          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.4em] mt-1">Lead Management</p>
         </div>
 
         {/* Card */}
@@ -63,19 +63,18 @@ export default function LoginPage() {
             <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Select Role Demo</label>
             <div className="grid grid-cols-3 gap-2">
               {[
-                { value: 'ceo',      label: 'CEO',      icon: 'business_center' },
-                { value: 'manager',  label: 'Manager',  icon: 'manage_accounts' },
+                { value: 'ceo', label: 'CEO', icon: 'business_center' },
+                { value: 'manager', label: 'Manager', icon: 'manage_accounts' },
                 { value: 'employee', label: 'Employee', icon: 'person' },
               ].map((r) => (
                 <button
                   key={r.value}
                   type="button"
                   onClick={() => setRole(r.value)}
-                  className={`flex items-center gap-2 p-3 rounded-xl border-2 text-sm font-bold transition-all shadow-sm ${
-                    role === r.value
+                  className={`flex items-center gap-2 p-3 rounded-xl border-2 text-sm font-bold transition-all shadow-sm ${role === r.value
                       ? 'border-primary-container bg-blue-50/50 text-blue-700'
                       : 'border-transparent bg-slate-50 text-slate-500 hover:border-blue-100 hover:bg-white'
-                  }`}
+                    }`}
                 >
                   <span className="material-symbols-outlined text-base">{r.icon}</span> {r.label}
                 </button>
