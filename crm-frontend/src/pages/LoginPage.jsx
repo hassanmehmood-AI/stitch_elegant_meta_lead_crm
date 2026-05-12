@@ -38,29 +38,28 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-5 relative text-on-surface" style={{ backgroundColor: '#fbf8ff' }}>
+    <div className="h-screen overflow-hidden flex items-center justify-center p-4 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-5 relative text-on-surface" style={{ backgroundColor: '#fbf8ff' }}>
       {/* Abstract Background Shapes */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-400/20 blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-400/20 blur-[120px] pointer-events-none"></div>
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-24 h-24 mb-4 transform hover:scale-105 transition-transform duration-300">
-            <img src="/logo.png" alt="Penta CRM Logo" className="w-full h-full object-contain drop-shadow-xl" />
+        <div className="text-center mb-4">
+          <div className="inline-flex items-center justify-center w-14 h-14 mb-2 transform hover:scale-105 transition-transform duration-300">
+            <img src="/logo.png" alt="Lead Management CRM Logo" className="w-full h-full object-contain drop-shadow-xl" />
           </div>
-          <h1 className="text-3xl font-bold text-blue-700 tracking-[0.06em]">Penta CRM</h1>
-          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.4em] mt-1">Lead Management</p>
+          <h1 className="text-2xl font-bold text-blue-700 tracking-[0.06em]">Lead Management CRM</h1>
         </div>
 
         {/* Card */}
-        <div className="bg-white border border-blue-600/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] rounded-2xl p-6 transform transition-all duration-300 hover:shadow-[0_40px_100px_-20px_rgba(27,46,253,0.15)]">
-          <h2 className="text-[22px] font-bold text-on-surface mb-1">Welcome back</h2>
-          <p className="text-sm text-slate-500 mb-6">Sign in to your account to continue.</p>
+        <div className="bg-white border border-blue-600/10 shadow-[0_40px_60px_-15px_rgba(27,46,253,0.03)] rounded-2xl p-9 transform transition-all duration-300 hover:shadow-[0_40px_100px_-20px_rgba(27,46,253,0.15)]">
+          <h2 className="text-3xl font-bold text-on-surface mb-1 text-center">Welcome</h2>
+          <p className="text-sm font-bold text-slate-500 mb-3 text-center">Sign in to your account to continue.</p>
 
           {/* Demo role picker */}
-          <div className="mb-4">
-            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Select Role Demo</label>
+          <div className="mb-3">
+            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Select Role Demo</label>
             <div className="grid grid-cols-3 gap-2">
               {[
                 { value: 'ceo', label: 'CEO', icon: 'business_center' },
@@ -71,7 +70,7 @@ export default function LoginPage() {
                   key={r.value}
                   type="button"
                   onClick={() => setRole(r.value)}
-                  className={`flex items-center gap-2 p-3 rounded-xl border-2 text-sm font-bold transition-all shadow-sm ${role === r.value
+                  className={`flex items-center gap-2 p-2 rounded-xl border-2 text-sm font-bold transition-all shadow-sm ${role === r.value
                       ? 'border-primary-container bg-blue-50/50 text-blue-700'
                       : 'border-transparent bg-slate-50 text-slate-500 hover:border-blue-100 hover:bg-white'
                     }`}
@@ -89,9 +88,9 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-3">
+          <form onSubmit={handleSubmit} className="space-y-2">
             <div>
-              <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Email</label>
+              <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Email</label>
               <div className="relative">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">mail</span>
                 <input
@@ -99,13 +98,13 @@ export default function LoginPage() {
                   value={form.email}
                   onChange={set('email')}
                   placeholder="admin@pentacrm.com"
-                  className="w-full pl-10 pr-3 py-3 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all shadow-inner"
+                  className="w-full pl-10 pr-3 py-2.5 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all shadow-inner"
                   required
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Password</label>
+              <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Password</label>
               <div className="relative">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">lock</span>
                 <input
@@ -113,7 +112,7 @@ export default function LoginPage() {
                   value={form.password}
                   onChange={set('password')}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-10 py-3 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all shadow-inner"
+                  className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all shadow-inner"
                   required
                 />
                 <button
@@ -135,7 +134,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`group w-full py-3 bg-primary-container text-white rounded-xl font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-blue-200 flex items-center justify-center gap-2 mt-4 hover:shadow-blue-300 hover:-translate-y-0.5 ${isSubmitting ? 'opacity-75' : ''}`}
+              className={`group w-full py-2.5 bg-primary-container text-white rounded-xl font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-blue-200 flex items-center justify-center gap-2 mt-3 hover:shadow-blue-300 hover:-translate-y-0.5 ${isSubmitting ? 'opacity-75' : ''}`}
             >
               {isSubmitting ? (
                 <>
@@ -151,8 +150,8 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-xs text-slate-400 mt-4">
-          © 2024 Penta CRM · All rights reserved
+        <p className="text-center text-xs text-slate-400 mt-3">
+          © 2024 Lead Management CRM · All rights reserved
         </p>
       </div>
     </div>
