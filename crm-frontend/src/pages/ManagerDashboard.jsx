@@ -103,7 +103,7 @@ export default function ManagerDashboard() {
             </h2>
             <button
               onClick={() => setShowAddEmployee(true)}
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all shadow-lg shadow-blue-100"
+              className="flex items-center gap-2 bg-blue-600 hover:bg-[#ff5a1f] active:scale-95 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all shadow-lg shadow-blue-100 hover:shadow-orange-200 hover:-translate-y-0.5"
             >
               <span className="material-symbols-outlined text-lg">person_add</span>
               Add Employee

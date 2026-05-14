@@ -8,18 +8,10 @@ export default function AddEmployeeModal({ onClose, onSuccess }) {
     password: '',
     initials: '',
   });
-  const [selectedLeadId, setSelectedLeadId] = useState('');
-  const [unassignedLeads, setUnassignedLeads] = useState([]);
-  const [leadsLoading, setLeadsLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    api.getUnassignedLeads()
-      .then(setUnassignedLeads)
-      .catch(() => setUnassignedLeads([]))
-      .finally(() => setLeadsLoading(false));
-  }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,9 +26,7 @@ export default function AddEmployeeModal({ onClose, onSuccess }) {
     try {
       const response = await api.addAgent(formData);
 
-      if (selectedLeadId && formData.initials) {
-        await api.assignLeadToAgent(Number(selectedLeadId), formData.initials.toUpperCase());
-      }
+
 
       onSuccess?.(response);
       onClose();
@@ -49,7 +39,7 @@ export default function AddEmployeeModal({ onClose, onSuccess }) {
     }
   };
 
-  const selectedLead = unassignedLeads.find((l) => String(l.id) === String(selectedLeadId));
+
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
@@ -128,50 +118,7 @@ export default function AddEmployeeModal({ onClose, onSuccess }) {
             </div>
           </div>
 
-          {/* Lead Assignment Section */}
-          <div className="pt-2">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="material-symbols-outlined text-blue-400 text-base">assignment_ind</span>
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Assign a Lead (Optional)</label>
-            </div>
 
-            {leadsLoading ? (
-              <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 rounded-xl">
-                <div className="w-4 h-4 border-2 border-slate-200 border-t-blue-400 rounded-full animate-spin" />
-                <span className="text-xs text-slate-400">Loading leads…</span>
-              </div>
-            ) : unassignedLeads.length === 0 ? (
-              <div className="px-4 py-3 bg-slate-50 rounded-xl text-xs text-slate-400 font-medium">
-                No unassigned leads available
-              </div>
-            ) : (
-              <select
-                value={selectedLeadId}
-                onChange={(e) => setSelectedLeadId(e.target.value)}
-                className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-blue-100 outline-none text-on-surface font-medium appearance-none"
-              >
-                <option value="">— Skip, assign later —</option>
-                {unassignedLeads.map((lead) => (
-                  <option key={lead.id} value={lead.id}>
-                    {lead.name} · {lead.platform || lead.source || 'Meta'} · {lead.whatsapp_number || lead.phone || ''}
-                  </option>
-                ))}
-              </select>
-            )}
-
-            {selectedLead && (
-              <div className="mt-2 px-4 py-3 bg-blue-50 rounded-xl flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-200 flex items-center justify-center text-xs font-bold text-blue-700 flex-shrink-0">
-                  {selectedLead.initials || selectedLead.name?.slice(0, 2).toUpperCase()}
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs font-bold text-blue-900 truncate">{selectedLead.name}</p>
-                  <p className="text-[10px] text-blue-500 truncate">{selectedLead.platform || selectedLead.source} · {selectedLead.status}</p>
-                </div>
-                <span className="material-symbols-outlined text-blue-400 text-base ml-auto flex-shrink-0">check_circle</span>
-              </div>
-            )}
-          </div>
 
           <div className="pt-2 flex gap-4">
             <button
@@ -184,14 +131,14 @@ export default function AddEmployeeModal({ onClose, onSuccess }) {
             <button
               type="submit"
               disabled={loading}
-              className="flex-[2] py-3.5 rounded-2xl bg-blue-600 text-white font-bold text-sm hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-200 disabled:opacity-60"
+              className="flex-[2] py-3.5 rounded-2xl bg-blue-600 text-white font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-200 disabled:opacity-60 hover:bg-[#ff5a1f] hover:shadow-orange-200 hover:-translate-y-0.5"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
                 <>
                   <span className="material-symbols-outlined text-lg">person_add</span>
-                  {selectedLeadId ? 'Create & Assign Lead' : 'Create Account'}
+                  Create Account
                 </>
               )}
             </button>

@@ -532,7 +532,7 @@ export default function LeadDetailsPage() {
           <div className="mt-10 flex justify-end p-6 bg-white rounded-2xl border border-blue-100/20 shadow-[0_4px_20px_-8px_rgba(27,46,253,0.06)]">
             <button
               onClick={() => setShowEditLead(true)}
-              className="flex items-center gap-2 bg-primary-container text-white px-10 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-blue-200"
+              className="flex items-center gap-2 bg-primary-container text-white px-10 py-3 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-200 hover:bg-[#ff5a1f] hover:shadow-orange-200 hover:-translate-y-0.5"
             >
               <span className="material-symbols-outlined text-base">save</span>
               Submit Changes
