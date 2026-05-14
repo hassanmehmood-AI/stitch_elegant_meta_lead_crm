@@ -164,7 +164,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center text-xs text-slate-400 mt-3">
-          © 2024 Lead Management CRM · All rights reserved
+          © 2026 Penta Squad CRM · All rights reserved
         </p>
       </div>
     </div>
